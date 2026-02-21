@@ -320,12 +320,6 @@ Nexus Prime is a commitment to hardware respect. It changes your coding habits f
 ---
 
 # Nexus Prime: Gerçek Zamanlı Simülasyonlar İçin Yüksek Performanslı, Donanım Duyarlı ECS Mimarisi
-
-**Yazar:** Nexus Prime Sistem Mühendisliği Ekibi
-
-**Tarih:** Şubat 2026
-**Anahtar Kelimeler:** Sistem Mimarisi, Donanım Duyarlı Tasarım, Veri Odaklı Programlama, SIMD, Bellek Hizalaması, Bellek Duvarı, Sıfır-GC
-
 ---
 
 ## Özet / Yönetici Özeti
