@@ -3,7 +3,7 @@
 # ⚡ Nexus Prime
 **A High-Performance, Hardware-Aware ECS Architecture for Real-Time Simulations in Unity**
 
-[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue)](https://gokhanc.github.io/Nexus/)
+[![Documentation](https://img.shields.io/badge/docs-MkDocs-blue)]( https://gkhanc.github.io/Nexus/)
 [![Architecture](https://img.shields.io/badge/architecture-SparseSet-success)]()
 [![GC Pressure](https://img.shields.io/badge/allocation-Zero_GC-brightgreen)]()
 
