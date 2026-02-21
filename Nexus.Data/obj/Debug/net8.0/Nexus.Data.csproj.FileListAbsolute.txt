@@ -1,0 +1,11 @@
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.AssemblyInfoInputs.cache
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.AssemblyInfo.cs
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.csproj.CoreCompileInputs.cache
+/home/gokhanc/Development/Nexus/Nexus.Data/bin/Debug/net8.0/Nexus.Data.deps.json
+/home/gokhanc/Development/Nexus/Nexus.Data/bin/Debug/net8.0/Nexus.Data.dll
+/home/gokhanc/Development/Nexus/Nexus.Data/bin/Debug/net8.0/Nexus.Data.pdb
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.dll
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/refint/Nexus.Data.dll
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/Nexus.Data.pdb
+/home/gokhanc/Development/Nexus/Nexus.Data/obj/Debug/net8.0/ref/Nexus.Data.dll
