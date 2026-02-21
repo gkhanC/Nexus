@@ -1,0 +1,294 @@
+site_name: Nexus Prime
+site_description: High-Performance Data-Oriented ECS Framework for Unity
+site_url: https://gokhanc.github.io/Nexus/
+docs_dir: Documents
+
+theme:
+  name: material
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.instant
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.betterem
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - "Ana Sayfa": 'index.md'
+  - "Manifesto":
+      - "Nexus": 'Manifesto/Nexus.md'
+      - "White Paper (Raw)": 'Manifesto/Nexus_WhitePaper.md'
+  - "Tutorial & Mastery": 'Tutorials/Tutorial.md'
+  - "Manuals (Kullanım Kılavuzları)":
+      - "Benchmarks_eng": 'Manuals/Benchmarks_eng.md'
+      - "Benchmarks_tr": 'Manuals/Benchmarks_tr.md'
+      - "Cookbook_eng": 'Manuals/Cookbook_eng.md'
+      - "Cookbook_tr": 'Manuals/Cookbook_tr.md'
+      - "DataStructures_eng": 'Manuals/DataStructures_eng.md'
+      - "DataStructures_tr": 'Manuals/DataStructures_tr.md'
+      - "UnityBridges_eng": 'Manuals/UnityBridges_eng.md'
+      - "UnityBridges_tr": 'Manuals/UnityBridges_tr.md'
+  - "Core Modules":
+      - "Analyzers": 'Core_Modules/Analyzers.md'
+      - "Bridge": 'Core_Modules/Bridge.md'
+      - "Buffer": 'Core_Modules/Buffer.md'
+      - "Generator": 'Core_Modules/Generator.md'
+      - "JobSystem": 'Core_Modules/JobSystem.md'
+      - "Query": 'Core_Modules/Query.md'
+      - "Registry": 'Core_Modules/Registry.md'
+      - "Snapshot": 'Core_Modules/Snapshot.md'
+  - "API References":
+      - "AIBehaviorTree_eng": 'API_References/AIBehaviorTree_eng.md'
+      - "AIBehaviorTree_tr": 'API_References/AIBehaviorTree_tr.md'
+      - "AutoSystemGenerator_eng": 'API_References/AutoSystemGenerator_eng.md'
+      - "AutoSystemGenerator_tr": 'API_References/AutoSystemGenerator_tr.md'
+      - "AutomaticInternalPooling_eng": 'API_References/AutomaticInternalPooling_eng.md'
+      - "AutomaticInternalPooling_tr": 'API_References/AutomaticInternalPooling_tr.md'
+      - "BitPackedAttribute_eng": 'API_References/BitPackedAttribute_eng.md'
+      - "BitPackedAttribute_tr": 'API_References/BitPackedAttribute_tr.md'
+      - "BottleneckVisualizer_eng": 'API_References/BottleneckVisualizer_eng.md'
+      - "BottleneckVisualizer_tr": 'API_References/BottleneckVisualizer_tr.md'
+      - "BridgeHub_eng": 'API_References/BridgeHub_eng.md'
+      - "BridgeHub_tr": 'API_References/BridgeHub_tr.md'
+      - "ChunkedBuffer_eng": 'API_References/ChunkedBuffer_eng.md'
+      - "ChunkedBuffer_tr": 'API_References/ChunkedBuffer_tr.md'
+      - "ComponentTypeManager_eng": 'API_References/ComponentTypeManager_eng.md'
+      - "ComponentTypeManager_tr": 'API_References/ComponentTypeManager_tr.md'
+      - "DeltaStateSerializer_eng": 'API_References/DeltaStateSerializer_eng.md'
+      - "DeltaStateSerializer_tr": 'API_References/DeltaStateSerializer_tr.md'
+      - "DirtyFlagProxy_eng": 'API_References/DirtyFlagProxy_eng.md'
+      - "DirtyFlagProxy_tr": 'API_References/DirtyFlagProxy_tr.md'
+      - "DirtySyncGenerator_eng": 'API_References/DirtySyncGenerator_eng.md'
+      - "DirtySyncGenerator_tr": 'API_References/DirtySyncGenerator_tr.md'
+      - "EditorCockpit_Overview_eng": 'API_References/EditorCockpit_Overview_eng.md'
+      - "EditorCockpit_Overview_tr": 'API_References/EditorCockpit_Overview_tr.md'
+      - "EntityCommandBuffer_eng": 'API_References/EntityCommandBuffer_eng.md'
+      - "EntityCommandBuffer_tr": 'API_References/EntityCommandBuffer_tr.md'
+      - "EntityId_eng": 'API_References/EntityId_eng.md'
+      - "EntityId_tr": 'API_References/EntityId_tr.md'
+      - "EntityInspectorPro_eng": 'API_References/EntityInspectorPro_eng.md'
+      - "EntityInspectorPro_tr": 'API_References/EntityInspectorPro_tr.md'
+      - "HierarchicalSnapshotManager_eng": 'API_References/HierarchicalSnapshotManager_eng.md'
+      - "HierarchicalSnapshotManager_tr": 'API_References/HierarchicalSnapshotManager_tr.md'
+      - "INexusJobSystem_eng": 'API_References/INexusJobSystem_eng.md'
+      - "INexusJobSystem_tr": 'API_References/INexusJobSystem_tr.md'
+      - "INexusRegistry_eng": 'API_References/INexusRegistry_eng.md'
+      - "INexusRegistry_tr": 'API_References/INexusRegistry_tr.md'
+      - "INexusSystem_eng": 'API_References/INexusSystem_eng.md'
+      - "INexusSystem_tr": 'API_References/INexusSystem_tr.md'
+      - "ISparseSet_eng": 'API_References/ISparseSet_eng.md'
+      - "ISparseSet_tr": 'API_References/ISparseSet_tr.md'
+      - "JobSystem_eng": 'API_References/JobSystem_eng.md'
+      - "JobSystem_tr": 'API_References/JobSystem_tr.md'
+      - "LiveShaderBridge_eng": 'API_References/LiveShaderBridge_eng.md'
+      - "LiveShaderBridge_tr": 'API_References/LiveShaderBridge_tr.md'
+      - "LiveStateTweaker_eng": 'API_References/LiveStateTweaker_eng.md'
+      - "LiveStateTweaker_tr": 'API_References/LiveStateTweaker_tr.md'
+      - "LogicHotSwapSystem_eng": 'API_References/LogicHotSwapSystem_eng.md'
+      - "LogicHotSwapSystem_tr": 'API_References/LogicHotSwapSystem_tr.md'
+      - "MustBeUnmanagedAttribute_eng": 'API_References/MustBeUnmanagedAttribute_eng.md'
+      - "MustBeUnmanagedAttribute_tr": 'API_References/MustBeUnmanagedAttribute_tr.md'
+      - "NexusAnalyzer_eng": 'API_References/NexusAnalyzer_eng.md'
+      - "NexusAnalyzer_tr": 'API_References/NexusAnalyzer_tr.md'
+      - "NexusAnimatorStateMachine_eng": 'API_References/NexusAnimatorStateMachine_eng.md'
+      - "NexusAnimatorStateMachine_tr": 'API_References/NexusAnimatorStateMachine_tr.md'
+      - "NexusAttributeWrappers_eng": 'API_References/NexusAttributeWrappers_eng.md'
+      - "NexusAttributeWrappers_tr": 'API_References/NexusAttributeWrappers_tr.md'
+      - "NexusAttributesSuite_eng": 'API_References/NexusAttributesSuite_eng.md'
+      - "NexusAttributesSuite_tr": 'API_References/NexusAttributesSuite_tr.md'
+      - "NexusAttributes_eng": 'API_References/NexusAttributes_eng.md'
+      - "NexusAttributes_tr": 'API_References/NexusAttributes_tr.md'
+      - "NexusAudioLinker_eng": 'API_References/NexusAudioLinker_eng.md'
+      - "NexusAudioLinker_tr": 'API_References/NexusAudioLinker_tr.md'
+      - "NexusBillboardUI_eng": 'API_References/NexusBillboardUI_eng.md'
+      - "NexusBillboardUI_tr": 'API_References/NexusBillboardUI_tr.md'
+      - "NexusBridge_eng": 'API_References/NexusBridge_eng.md'
+      - "NexusBridge_tr": 'API_References/NexusBridge_tr.md'
+      - "NexusCachedQuery_eng": 'API_References/NexusCachedQuery_eng.md'
+      - "NexusCachedQuery_tr": 'API_References/NexusCachedQuery_tr.md'
+      - "NexusCollections_eng": 'API_References/NexusCollections_eng.md'
+      - "NexusCollections_tr": 'API_References/NexusCollections_tr.md'
+      - "NexusCommandEngines_eng": 'API_References/NexusCommandEngines_eng.md'
+      - "NexusCommandEngines_tr": 'API_References/NexusCommandEngines_tr.md'
+      - "NexusCommandManager_eng": 'API_References/NexusCommandManager_eng.md'
+      - "NexusCommandManager_tr": 'API_References/NexusCommandManager_tr.md'
+      - "NexusCommandStack_eng": 'API_References/NexusCommandStack_eng.md'
+      - "NexusCommandStack_tr": 'API_References/NexusCommandStack_tr.md'
+      - "NexusCoreExtensions_eng": 'API_References/NexusCoreExtensions_eng.md'
+      - "NexusCoreExtensions_tr": 'API_References/NexusCoreExtensions_tr.md'
+      - "NexusDashboard_eng": 'API_References/NexusDashboard_eng.md'
+      - "NexusDashboard_tr": 'API_References/NexusDashboard_tr.md'
+      - "NexusDebugAttribute_eng": 'API_References/NexusDebugAttribute_eng.md'
+      - "NexusDebugAttribute_tr": 'API_References/NexusDebugAttribute_tr.md'
+      - "NexusDevelopmentSuite_eng": 'API_References/NexusDevelopmentSuite_eng.md'
+      - "NexusDevelopmentSuite_tr": 'API_References/NexusDevelopmentSuite_tr.md'
+      - "NexusDevelopmentTools_eng": 'API_References/NexusDevelopmentTools_eng.md'
+      - "NexusDevelopmentTools_tr": 'API_References/NexusDevelopmentTools_tr.md'
+      - "NexusEntity_eng": 'API_References/NexusEntity_eng.md'
+      - "NexusEntity_tr": 'API_References/NexusEntity_tr.md'
+      - "NexusEventBus_eng": 'API_References/NexusEventBus_eng.md'
+      - "NexusEventBus_tr": 'API_References/NexusEventBus_tr.md'
+      - "NexusExtensionUtilities_eng": 'API_References/NexusExtensionUtilities_eng.md'
+      - "NexusExtensionUtilities_tr": 'API_References/NexusExtensionUtilities_tr.md'
+      - "NexusFolderManager_eng": 'API_References/NexusFolderManager_eng.md'
+      - "NexusFolderManager_tr": 'API_References/NexusFolderManager_tr.md'
+      - "NexusGameplayBases_eng": 'API_References/NexusGameplayBases_eng.md'
+      - "NexusGameplayBases_tr": 'API_References/NexusGameplayBases_tr.md'
+      - "NexusGraphLogicEditor_eng": 'API_References/NexusGraphLogicEditor_eng.md'
+      - "NexusGraphLogicEditor_tr": 'API_References/NexusGraphLogicEditor_tr.md'
+      - "NexusHelper_eng": 'API_References/NexusHelper_eng.md'
+      - "NexusHelper_tr": 'API_References/NexusHelper_tr.md'
+      - "NexusHueShifter_eng": 'API_References/NexusHueShifter_eng.md'
+      - "NexusHueShifter_tr": 'API_References/NexusHueShifter_tr.md'
+      - "NexusInitializer_eng": 'API_References/NexusInitializer_eng.md'
+      - "NexusInitializer_tr": 'API_References/NexusInitializer_tr.md'
+      - "NexusInputAbstractions_eng": 'API_References/NexusInputAbstractions_eng.md'
+      - "NexusInputAbstractions_tr": 'API_References/NexusInputAbstractions_tr.md'
+      - "NexusInspectAttribute_eng": 'API_References/NexusInspectAttribute_eng.md'
+      - "NexusInspectAttribute_tr": 'API_References/NexusInspectAttribute_tr.md'
+      - "NexusIntegrityChecker_eng": 'API_References/NexusIntegrityChecker_eng.md'
+      - "NexusIntegrityChecker_tr": 'API_References/NexusIntegrityChecker_tr.md'
+      - "NexusIntegrityDashboard_eng": 'API_References/NexusIntegrityDashboard_eng.md'
+      - "NexusIntegrityDashboard_tr": 'API_References/NexusIntegrityDashboard_tr.md'
+      - "NexusJoiner_eng": 'API_References/NexusJoiner_eng.md'
+      - "NexusJoiner_tr": 'API_References/NexusJoiner_tr.md'
+      - "NexusLayout_eng": 'API_References/NexusLayout_eng.md'
+      - "NexusLayout_tr": 'API_References/NexusLayout_tr.md'
+      - "NexusLogger_eng": 'API_References/NexusLogger_eng.md'
+      - "NexusLogger_tr": 'API_References/NexusLogger_tr.md'
+      - "NexusMath_eng": 'API_References/NexusMath_eng.md'
+      - "NexusMath_tr": 'API_References/NexusMath_tr.md'
+      - "NexusMemoryHeatmap_eng": 'API_References/NexusMemoryHeatmap_eng.md'
+      - "NexusMemoryHeatmap_tr": 'API_References/NexusMemoryHeatmap_tr.md'
+      - "NexusMemoryManager_eng": 'API_References/NexusMemoryManager_eng.md'
+      - "NexusMemoryManager_tr": 'API_References/NexusMemoryManager_tr.md'
+      - "NexusMinMax_eng": 'API_References/NexusMinMax_eng.md'
+      - "NexusMinMax_tr": 'API_References/NexusMinMax_tr.md'
+      - "NexusObjectMapping_eng": 'API_References/NexusObjectMapping_eng.md'
+      - "NexusObjectMapping_tr": 'API_References/NexusObjectMapping_tr.md'
+      - "NexusObjectPool_eng": 'API_References/NexusObjectPool_eng.md'
+      - "NexusObjectPool_tr": 'API_References/NexusObjectPool_tr.md'
+      - "NexusOptimizationTools_eng": 'API_References/NexusOptimizationTools_eng.md'
+      - "NexusOptimizationTools_tr": 'API_References/NexusOptimizationTools_tr.md'
+      - "NexusParallelSystem_eng": 'API_References/NexusParallelSystem_eng.md'
+      - "NexusParallelSystem_tr": 'API_References/NexusParallelSystem_tr.md'
+      - "NexusPerformanceGuard_eng": 'API_References/NexusPerformanceGuard_eng.md'
+      - "NexusPerformanceGuard_tr": 'API_References/NexusPerformanceGuard_tr.md'
+      - "NexusProfiler_eng": 'API_References/NexusProfiler_eng.md'
+      - "NexusProfiler_tr": 'API_References/NexusProfiler_tr.md'
+      - "NexusProgression_eng": 'API_References/NexusProgression_eng.md'
+      - "NexusProgression_tr": 'API_References/NexusProgression_tr.md'
+      - "NexusQueryBuilder_eng": 'API_References/NexusQueryBuilder_eng.md'
+      - "NexusQueryBuilder_tr": 'API_References/NexusQueryBuilder_tr.md'
+      - "NexusQueryOptimizer_eng": 'API_References/NexusQueryOptimizer_eng.md'
+      - "NexusQueryOptimizer_tr": 'API_References/NexusQueryOptimizer_tr.md'
+      - "NexusQuery_eng": 'API_References/NexusQuery_eng.md'
+      - "NexusQuery_tr": 'API_References/NexusQuery_tr.md'
+      - "NexusRandmonoizer_eng": 'API_References/NexusRandmonoizer_eng.md'
+      - "NexusRandmonoizer_tr": 'API_References/NexusRandmonoizer_tr.md'
+      - "NexusRigidbodyMove_eng": 'API_References/NexusRigidbodyMove_eng.md'
+      - "NexusRigidbodyMove_tr": 'API_References/NexusRigidbodyMove_tr.md'
+      - "NexusRotateController_eng": 'API_References/NexusRotateController_eng.md'
+      - "NexusRotateController_tr": 'API_References/NexusRotateController_tr.md'
+      - "NexusRotationField_eng": 'API_References/NexusRotationField_eng.md'
+      - "NexusRotationField_tr": 'API_References/NexusRotationField_tr.md'
+      - "NexusSceneOrganizer_eng": 'API_References/NexusSceneOrganizer_eng.md'
+      - "NexusSceneOrganizer_tr": 'API_References/NexusSceneOrganizer_tr.md'
+      - "NexusSmartExtensions_eng": 'API_References/NexusSmartExtensions_eng.md'
+      - "NexusSmartExtensions_tr": 'API_References/NexusSmartExtensions_tr.md'
+      - "NexusStackable_eng": 'API_References/NexusStackable_eng.md'
+      - "NexusStackable_tr": 'API_References/NexusStackable_tr.md'
+      - "NexusStateMachine_eng": 'API_References/NexusStateMachine_eng.md'
+      - "NexusStateMachine_tr": 'API_References/NexusStateMachine_tr.md'
+      - "NexusStatus_eng": 'API_References/NexusStatus_eng.md'
+      - "NexusStatus_tr": 'API_References/NexusStatus_tr.md'
+      - "NexusString_eng": 'API_References/NexusString_eng.md'
+      - "NexusString_tr": 'API_References/NexusString_tr.md'
+      - "NexusSwerveController_eng": 'API_References/NexusSwerveController_eng.md'
+      - "NexusSwerveController_tr": 'API_References/NexusSwerveController_tr.md'
+      - "NexusSwerveInput_eng": 'API_References/NexusSwerveInput_eng.md'
+      - "NexusSwerveInput_tr": 'API_References/NexusSwerveInput_tr.md'
+      - "NexusSyncManager_eng": 'API_References/NexusSyncManager_eng.md'
+      - "NexusSyncManager_tr": 'API_References/NexusSyncManager_tr.md'
+      - "NexusSystemGenerator_eng": 'API_References/NexusSystemGenerator_eng.md'
+      - "NexusSystemGenerator_tr": 'API_References/NexusSystemGenerator_tr.md'
+      - "NexusTrajectorySimulator_eng": 'API_References/NexusTrajectorySimulator_eng.md'
+      - "NexusTrajectorySimulator_tr": 'API_References/NexusTrajectorySimulator_tr.md'
+      - "NexusUIUtilities_eng": 'API_References/NexusUIUtilities_eng.md'
+      - "NexusUIUtilities_tr": 'API_References/NexusUIUtilities_tr.md'
+      - "NexusUnitTestGenerator_eng": 'API_References/NexusUnitTestGenerator_eng.md'
+      - "NexusUnitTestGenerator_tr": 'API_References/NexusUnitTestGenerator_tr.md'
+      - "NexusUnityExtensions_eng": 'API_References/NexusUnityExtensions_eng.md'
+      - "NexusUnityExtensions_tr": 'API_References/NexusUnityExtensions_tr.md'
+      - "NexusVisualDebugger_eng": 'API_References/NexusVisualDebugger_eng.md'
+      - "NexusVisualDebugger_tr": 'API_References/NexusVisualDebugger_tr.md'
+      - "NexusWorkflowTools_eng": 'API_References/NexusWorkflowTools_eng.md'
+      - "NexusWorkflowTools_tr": 'API_References/NexusWorkflowTools_tr.md'
+      - "PhysicsBridge_eng": 'API_References/PhysicsBridge_eng.md'
+      - "PhysicsBridge_tr": 'API_References/PhysicsBridge_tr.md'
+      - "PrefabConverter_eng": 'API_References/PrefabConverter_eng.md'
+      - "PrefabConverter_tr": 'API_References/PrefabConverter_tr.md'
+      - "Program_eng": 'API_References/Program_eng.md'
+      - "Program_tr": 'API_References/Program_tr.md'
+      - "Registry_eng": 'API_References/Registry_eng.md'
+      - "Registry_tr": 'API_References/Registry_tr.md'
+      - "RemoteDataSynchronizer_eng": 'API_References/RemoteDataSynchronizer_eng.md'
+      - "RemoteDataSynchronizer_tr": 'API_References/RemoteDataSynchronizer_tr.md'
+      - "SnapshotDiffViewer_eng": 'API_References/SnapshotDiffViewer_eng.md'
+      - "SnapshotDiffViewer_tr": 'API_References/SnapshotDiffViewer_tr.md'
+      - "SnapshotManager_eng": 'API_References/SnapshotManager_eng.md'
+      - "SnapshotManager_tr": 'API_References/SnapshotManager_tr.md'
+      - "SparseSet_eng": 'API_References/SparseSet_eng.md'
+      - "SparseSet_tr": 'API_References/SparseSet_tr.md'
+      - "TimeTravelDebugger_eng": 'API_References/TimeTravelDebugger_eng.md'
+      - "TimeTravelDebugger_tr": 'API_References/TimeTravelDebugger_tr.md'
+      - "UnmanagedComponentAnalyzer_eng": 'API_References/UnmanagedComponentAnalyzer_eng.md'
+      - "UnmanagedComponentAnalyzer_tr": 'API_References/UnmanagedComponentAnalyzer_tr.md'
+      - "VFXGraphProvider_eng": 'API_References/VFXGraphProvider_eng.md'
+      - "VFXGraphProvider_tr": 'API_References/VFXGraphProvider_tr.md'
