@@ -59,8 +59,8 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  - "Ana Sayfa": 'index.md' 
-  - "Nexus": 'Manifesto/Nexus.md'
+  - "Main Page": 'index.md' 
+  - "Nexus Intro": 'Manifesto/Nexus.md'
   - "White Paper (Raw)": 'Manifesto/Nexus_WhitePaper.md'
   - "Tutorial & Mastery": 'Tutorials/Tutorial.md'
   - "Manuals (Kullanım Kılavuzları)":
