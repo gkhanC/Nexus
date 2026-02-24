@@ -13,10 +13,12 @@ Nexus treats entity presence as a binary state within a component bitset. Filter
 
 ### 1.1 Multi-Component Filtering Equation
 A query for components $C_1 \cap C_2 \cap \dots \cap C_n$ is resolved by:
+
 $$ResultBitset = Bitset(C_1) \ \& \ Bitset(C_2) \ \& \ \dots \ \& \ Bitset(C_n)$$
 
 ### 1.2 SIMD Vectorization Throughput
 Using AVX2/AVX-512, Nexus processes multiple 64-bit segments in parallel. The throughput $T$ (entities per cycle) is defined as:
+
 $$T = \frac{RegisterWidth_{bits}}{InstructionsPerCycle}$$
 
 For AVX2 (256-bit), a single instruction filters 32 entities simultaneously, bypassing the **Branch Misprediction** penalty of scalar `if` checks.
@@ -38,6 +40,7 @@ graph LR
 
 ### 2.1 The L2 Cache Advantage
 For 1,000,000 entities, the bitset size is calculated as:
+
 $$Size = \frac{1,000,000}{8} = 125,000 \ bytes \approx 122 \ KB$$
 
 This payload fits entirely within the L2 cache ($256KB - 512KB$) of modern CPUs, ensuring that the entire filtering phase occurs without a single DRAM access after the first load. Traditional OOP iteration checks require dereferencing pointers back to RAM for hundreds of megabytes dynamically.
@@ -88,10 +91,12 @@ Nexus, bileşen varlığını bir bit maskesi içinde ikili bir durum olarak kab
 
 ### 1.1 Çoklu Bileşen Filtreleme Denklemi
 $C_1 \cap C_2 \cap \dots \cap C_n$ bileşenleri için bir sorgu şu şekilde çözülür:
+
 $$SonucBitseti = Bitset(C_1) \ \& \ Bitset(C_2) \ \& \ \dots \ \& \ Bitset(C_n)$$
 
 ### 1.2 Vektörize Akış Hızı (Throughput)
 AVX2/AVX-512 kullanarak Nexus, birden fazla 64-bit segmenti paralel olarak işler. Akış hızı $T$ (döngü başına varlık) şu şekilde tanımlanır:
+
 $$T = \frac{RegisterGenisligi_{bit}}{KomutBasinaDongu}$$
 
 AVX2 (256-bit) kullanarak, tek bir komut 32 varlığı aynı anda filtreler. Bu, skaler `if` kontrollerinin yol açtığı **Dallanma Tahmin Hatası** maliyetini ortadan kaldırır.
@@ -113,6 +118,7 @@ graph LR
 
 ### 2.1 L2 Önbellek Avantajı
 1.000.000 varlık için bit seti boyutu:
+
 $$Boyut = \frac{1.000,000}{8} = 125.000 \ byte \approx 122 \ KB$$
 
 Bu veri yükü, modern CPU'ların L2 önbelleklerine ($256KB - 512KB$) tamamen sığar. Bu, ilk yüklemeden sonra tüm filtreleme aşamasının DRAM erişimi olmadan gerçekleşmesini sağlar. Geleneksel OOP iterasyonunda bu işlem MB'larca RAM referansının çözülmesini gerektirir.

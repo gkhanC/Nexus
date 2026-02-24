@@ -76,6 +76,7 @@ graph LR
 ```
 
 **Stall Mathematics:**
+
 $$Stall \% = MissRate \times Latency_{RAM}$$
 
 
@@ -167,8 +168,8 @@ graph LR
 
 **Instruction Efficiency Math:**
 For a 64-byte Cache Line and a 16-byte component:
-$$\frac{64 \ bytes}{16 \ bytes} = 4 \ Entities/Line$$
 
+$$\frac{64 \ bytes}{16 \ bytes} = 4 \ Entities/Line$$
 
 
 Nexus fetches 4 entities at once. OOP fetches 1 entity (plus 48 bytes of garbage data), wasting  of the bandwidth and forcing  more memory trips.
@@ -218,8 +219,8 @@ graph LR
 
 Nexus uses **SparseSets** to marry ID-based accessibility with array-based performance.
 
-* **Sparse Array**: Indexed by Entity ID. Stores the index in the Dense Array.
-* **Dense Array**: Stores the actual raw component data. This is what the CPU iterates over.
+*   **Sparse Array**: Indexed by Entity ID. Stores the index in the Dense Array.
+*   **Dense Array**: Stores the actual raw component data. This is what the CPU iterates over.
 
 ### 4.2 Swap-and-Pop: Maintaining 100% Density
 
@@ -249,6 +250,7 @@ stateDiagram-v2
 ```
 
 **Mathematical Proof of Density:**
+
 $$Density_{Buffer} = \frac{N}{Capacity} = 100\%$$
 
 
