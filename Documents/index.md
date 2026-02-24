@@ -320,12 +320,6 @@ Nexus Prime is a commitment to hardware respect. It changes your coding habits f
 ---
 
 # Nexus Prime: Gerçek Zamanlı Simülasyonlar İçin Yüksek Performanslı, Donanım Duyarlı ECS Mimarisi
-
-**Yazar:** Nexus Prime Sistem Mühendisliği Ekibi
-
-**Tarih:** Şubat 2026
-**Anahtar Kelimeler:** Sistem Mimarisi, Donanım Duyarlı Tasarım, Veri Odaklı Programlama, SIMD, Bellek Hizalaması, Bellek Duvarı, Sıfır-GC
-
 ---
 
 ## Özet / Yönetici Özeti
@@ -643,12 +637,3 @@ Milyonlarca varlığı `if` koşulu ile filtrelemek dallanma tahmini (branch pre
 ## 10. Sonuç: Felsefi Ufuk
 
 Nexus Prime donanıma duyulan bir saygı taahhüdüdür. Kodlama alışkanlıklarınızı "Nesne yaratmaktan" "Veriyi orkestre etmeye" dönüştürür. Yazılım mantığını CPU'nun fiziksel yasalarıyla uyumlu hale getirerek, performansı "en iyi çaba" sonucundan çıkarıp deterministik bir matematiksel kesinliğe dönüştürür.
-
----
-
-### Architectural Design Notes
-**Strategic Decision:** The white paper has been structurally expanded to include predictive memory schemas and a direct architectural comparison with industry alternatives like Unity DOTS / ECS. The entire document is delivered in raw Markdown format as requested, preserving all prior content with zero omissions.
-
-**Reason and Logic:** To establish Nexus Prime as a definitive engineering standard, it is necessary to not only solve existing problems but also predict hidden hardware bottlenecks like False Sharing and Cache Straddling. Furthermore, by directly contrasting Nexus Prime's SparseSet architecture with Unity DOTS' Archetype architecture, the document clearly delineates the specific performance trade-offs (e.g., structural changes vs. memory density) without abstract ambiguity.
-
-**Fine Touch (False Sharing Thread-Isolation Schema):** When implementing the thread-isolation strategies shown in the "False Sharing" schema, dynamically calculate the chunk sizes based on `System.Environment.ProcessorCount * 64` to guarantee that no two processing threads ever write to overlapping cache lines on modern x86/ARM architectures.
