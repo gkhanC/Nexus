@@ -824,8 +824,8 @@ public void Dispose() {
 
 ### 12.4 Dolaylı Erişim Vergisini Ortadan Kaldırma
 `Registry.Get<T>` $O(1)$ olsa da, dağınık aramalar doğrusal iterasyona göre gecikme cezası getirir.
-* **Strateji**: Her zaman **Sıralı Sistem Erişimi**'ne öncelik verin. Bir `INexusSystem` içinde CPU prefetcher, bileşen dizilerini siz daha istemeden L1 önbelleğine getirir.
-* **Kural**: `Get` metodunu reaktif mantık için; `Sistemleri` ise yüksek frekanslı simülasyon mantığı için kullanın.
+*   **Strateji**: Her zaman **Sıralı Sistem Erişimi**'ne öncelik verin. Bir `INexusSystem` içinde CPU prefetcher, bileşen dizilerini siz daha istemeden L1 önbelleğine getirir.
+*   **Kural**: `Get` metodunu reaktif mantık için; `Sistemleri` ise yüksek frekanslı simülasyon mantığı için kullanın.
 
 ### 12.5 Stratejik Ölçeklendirme (Yük Treni Analojisi)
 Nexus yüksek bant genişlikli bir motordur.
