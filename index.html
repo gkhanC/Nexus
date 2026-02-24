@@ -1,0 +1,8820 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High-Performance Data-Oriented ECS Framework for Unity">
+      
+      
+      
+        <link rel="canonical" href="https://gokhanc.github.io/Nexus/">
+      
+      
+      
+        <link rel="next" href="Manifesto/Nexus/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Nexus Prime</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nexus-prime-a-high-performance-hardware-aware-ecs-architecture-for-real-time-simulations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Nexus Prime" class="md-header__button md-logo" aria-label="Nexus Prime" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nexus Prime
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Main Page
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Nexus Prime" class="md-nav__button md-logo" aria-label="Nexus Prime" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Nexus Prime
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Page
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract / Executive Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Abstract / Executive Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-value-proposition-why-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Value Proposition: Why Nexus Prime?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-nexus-suite-beyond-the-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nexus Suite: Beyond the Core
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-performance-glossary-foundations-of-modern-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Performance Glossary: Foundations of Modern Systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-paradigm-shift-the-philosophy-of-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Paradigm Shift: The Philosophy of DOD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-problem-identification-the-physics-of-inefficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Problem Identification: The Physics of Inefficiency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Problem Identification: The Physics of Inefficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-hardware-crisis-ram-vs-cpu-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Hardware Crisis: RAM vs. CPU Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-reference-crisis-fragmentation-pointer-chasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The Reference Crisis: Fragmentation &amp; Pointer Chasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-deep-dive-memory-topography-contiguity-vs-scattering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Deep Dive: Memory Topography (Contiguity vs. Scattering)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Deep Dive: Memory Topography (Contiguity vs. Scattering)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-c-memory-structures-the-scattered-oop-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 C# Memory Structures: The Scattered OOP Reality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-the-nexus-solution-sequential-contiguity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 The Nexus Solution: Sequential Contiguity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-predictive-memory-modeling-anticipating-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Predictive Memory Modeling: Anticipating Bottlenecks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-nexus-engine-orchestrating-contiguity-the-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Nexus Engine: Orchestrating Contiguity (The "How")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The Nexus Engine: Orchestrating Contiguity (The &#34;How&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-sparseset-the-id-to-direct-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 SparseSet: The ID-to-Direct Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-swap-and-pop-maintaining-100-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Swap-and-Pop: Maintaining 100% Density
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-alternative-industry-solutions-unity-dots-ecs-vs-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Alternative Industry Solutions: Unity DOTS / ECS vs. Nexus Prime
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Alternative Industry Solutions: Unity DOTS / ECS vs. Nexus Prime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-unity-dots-the-archetype-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Unity DOTS: The Archetype Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-nexus-prime-the-sparseset-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Nexus Prime: The SparseSet Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-zero-gc-management-the-technical-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Zero-GC Management: The Technical Proof
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-logic-orchestration-dag-simd-and-paging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logic Orchestration: DAG, SIMD, and Paging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Logic Orchestration: DAG, SIMD, and Paging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-directed-acyclic-graph-dag-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Directed Acyclic Graph (DAG) Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-simd-avx2-vectorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 SIMD (AVX2) Vectorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-16kb-paging-64-byte-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 16KB Paging &amp; 64-Byte Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-architectural-abstraction-the-dod-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Architectural Abstraction: The DOD Bridge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Architectural Abstraction: The DOD Bridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-comparison-standard-oop-vs-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Comparison: Standard OOP vs. Nexus Prime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-code-archetypes-implementation-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Code Archetypes: Implementation Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-performance-realities-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Performance Realities: Benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-strategic-evaluation-pros-cons-and-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Strategic Evaluation: Pros, Cons, and Risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Strategic Evaluation: Pros, Cons, and Risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-advantages-pros-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Advantages (Pros) &amp; Strengths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-risks-and-weaknesses-cons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Risks and Weaknesses (Cons)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-conclusion-the-philosophical-horizon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Conclusion: The Philosophical Horizon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-memory-management-tactical-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Memory Management &amp; Tactical Lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Memory Management &amp; Tactical Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-the-actor-safety-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 The "Actor" Safety Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-architectural-weakness-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Architectural Weakness Mitigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-the-dispose-pattern-hybrid-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 The Dispose Pattern &amp; Hybrid Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-eliminating-the-point-lookup-tax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Eliminating the Point-Lookup Tax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-strategic-scale-the-freight-train-analogy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 Strategic Scale (The Freight Train Analogy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manifesto/Nexus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nexus Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manifesto/Nexus_WhitePaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    White Paper (Raw)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Tutorials/Tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial & Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuals (Kullanım Kılavuzları)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manuals (Kullanım Kılavuzları)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/Benchmarks_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/Benchmarks_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/Cookbook_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/Cookbook_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/DataStructures_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataStructures_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/DataStructures_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataStructures_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/UnityBridges_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UnityBridges_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manuals/UnityBridges_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UnityBridges_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Analyzers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analyzers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Buffer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buffer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Generator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/JobSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JobSystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Core_Modules/Snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snapshot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API References
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API References
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AIBehaviorTree_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AIBehaviorTree_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AIBehaviorTree_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AIBehaviorTree_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AutoSystemGenerator_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AutoSystemGenerator_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AutoSystemGenerator_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AutoSystemGenerator_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AutomaticInternalPooling_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AutomaticInternalPooling_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/AutomaticInternalPooling_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AutomaticInternalPooling_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BitPackedAttribute_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BitPackedAttribute_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BitPackedAttribute_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BitPackedAttribute_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BottleneckVisualizer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BottleneckVisualizer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BottleneckVisualizer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BottleneckVisualizer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BridgeHub_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BridgeHub_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/BridgeHub_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BridgeHub_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ChunkedBuffer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChunkedBuffer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ChunkedBuffer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChunkedBuffer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ComponentTypeManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ComponentTypeManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ComponentTypeManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ComponentTypeManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DeltaStateSerializer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DeltaStateSerializer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DeltaStateSerializer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DeltaStateSerializer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DirtyFlagProxy_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DirtyFlagProxy_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DirtyFlagProxy_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DirtyFlagProxy_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DirtySyncGenerator_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DirtySyncGenerator_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/DirtySyncGenerator_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DirtySyncGenerator_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EditorCockpit_Overview_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EditorCockpit_Overview_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EditorCockpit_Overview_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EditorCockpit_Overview_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityCommandBuffer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityCommandBuffer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityCommandBuffer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityCommandBuffer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityId_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityId_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityId_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityId_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityInspectorPro_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityInspectorPro_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/EntityInspectorPro_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntityInspectorPro_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/HierarchicalSnapshotManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HierarchicalSnapshotManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/HierarchicalSnapshotManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HierarchicalSnapshotManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusJobSystem_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusJobSystem_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusJobSystem_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusJobSystem_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusRegistry_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusRegistry_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusRegistry_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusRegistry_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusSystem_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusSystem_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/INexusSystem_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INexusSystem_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ISparseSet_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISparseSet_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/ISparseSet_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISparseSet_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/JobSystem_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JobSystem_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/JobSystem_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JobSystem_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LiveShaderBridge_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LiveShaderBridge_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LiveShaderBridge_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LiveShaderBridge_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LiveStateTweaker_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LiveStateTweaker_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LiveStateTweaker_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LiveStateTweaker_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LogicHotSwapSystem_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LogicHotSwapSystem_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/LogicHotSwapSystem_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LogicHotSwapSystem_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/MustBeUnmanagedAttribute_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MustBeUnmanagedAttribute_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/MustBeUnmanagedAttribute_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MustBeUnmanagedAttribute_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAnalyzer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAnalyzer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAnalyzer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAnalyzer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAnimatorStateMachine_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAnimatorStateMachine_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAnimatorStateMachine_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAnimatorStateMachine_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributeWrappers_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributeWrappers_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributeWrappers_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributeWrappers_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributesSuite_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributesSuite_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributesSuite_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributesSuite_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributes_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributes_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAttributes_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAttributes_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAudioLinker_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAudioLinker_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusAudioLinker_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusAudioLinker_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusBillboardUI_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusBillboardUI_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusBillboardUI_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusBillboardUI_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusBridge_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusBridge_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusBridge_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusBridge_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCachedQuery_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCachedQuery_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCachedQuery_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCachedQuery_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCollections_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCollections_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCollections_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCollections_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandEngines_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandEngines_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandEngines_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandEngines_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandStack_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandStack_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCommandStack_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCommandStack_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCoreExtensions_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCoreExtensions_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusCoreExtensions_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusCoreExtensions_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDashboard_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDashboard_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDashboard_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDashboard_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDebugAttribute_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDebugAttribute_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDebugAttribute_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDebugAttribute_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDevelopmentSuite_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDevelopmentSuite_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDevelopmentSuite_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDevelopmentSuite_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDevelopmentTools_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDevelopmentTools_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusDevelopmentTools_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusDevelopmentTools_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusEntity_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusEntity_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusEntity_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusEntity_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusEventBus_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusEventBus_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusEventBus_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusEventBus_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusExtensionUtilities_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusExtensionUtilities_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusExtensionUtilities_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusExtensionUtilities_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusFolderManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusFolderManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusFolderManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusFolderManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusGameplayBases_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusGameplayBases_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusGameplayBases_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusGameplayBases_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusGraphLogicEditor_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusGraphLogicEditor_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusGraphLogicEditor_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusGraphLogicEditor_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusHelper_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusHelper_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusHelper_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusHelper_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusHueShifter_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusHueShifter_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusHueShifter_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusHueShifter_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInitializer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInitializer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInitializer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInitializer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInputAbstractions_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInputAbstractions_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInputAbstractions_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInputAbstractions_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInspectAttribute_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInspectAttribute_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusInspectAttribute_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusInspectAttribute_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusIntegrityChecker_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusIntegrityChecker_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusIntegrityChecker_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusIntegrityChecker_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusIntegrityDashboard_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusIntegrityDashboard_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusIntegrityDashboard_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusIntegrityDashboard_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusJoiner_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusJoiner_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusJoiner_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusJoiner_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusLayout_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusLayout_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusLayout_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusLayout_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusLogger_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusLogger_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusLogger_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusLogger_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMath_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMath_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMath_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMath_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMemoryHeatmap_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMemoryHeatmap_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMemoryHeatmap_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMemoryHeatmap_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMemoryManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMemoryManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMemoryManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMemoryManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMinMax_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMinMax_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusMinMax_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusMinMax_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusObjectMapping_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusObjectMapping_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusObjectMapping_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusObjectMapping_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusObjectPool_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusObjectPool_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusObjectPool_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusObjectPool_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusOptimizationTools_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusOptimizationTools_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusOptimizationTools_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusOptimizationTools_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusParallelSystem_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusParallelSystem_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusParallelSystem_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusParallelSystem_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusPerformanceGuard_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusPerformanceGuard_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusPerformanceGuard_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusPerformanceGuard_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusProfiler_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusProfiler_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusProfiler_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusProfiler_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusProgression_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusProgression_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusProgression_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusProgression_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQueryBuilder_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQueryBuilder_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQueryBuilder_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQueryBuilder_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQueryOptimizer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQueryOptimizer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQueryOptimizer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQueryOptimizer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQuery_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQuery_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusQuery_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusQuery_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRandmonoizer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRandmonoizer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRandmonoizer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRandmonoizer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRigidbodyMove_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRigidbodyMove_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRigidbodyMove_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRigidbodyMove_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRotateController_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRotateController_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRotateController_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRotateController_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRotationField_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRotationField_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusRotationField_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusRotationField_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSceneOrganizer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSceneOrganizer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSceneOrganizer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSceneOrganizer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSmartExtensions_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSmartExtensions_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSmartExtensions_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSmartExtensions_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStackable_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStackable_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStackable_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStackable_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStateMachine_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStateMachine_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStateMachine_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStateMachine_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStatus_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStatus_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusStatus_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusStatus_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusString_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusString_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusString_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusString_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSwerveController_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSwerveController_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSwerveController_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSwerveController_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSwerveInput_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSwerveInput_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSwerveInput_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSwerveInput_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSyncManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSyncManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSyncManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSyncManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSystemGenerator_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSystemGenerator_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusSystemGenerator_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusSystemGenerator_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusTrajectorySimulator_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusTrajectorySimulator_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusTrajectorySimulator_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusTrajectorySimulator_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUIUtilities_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUIUtilities_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUIUtilities_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUIUtilities_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUnitTestGenerator_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUnitTestGenerator_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUnitTestGenerator_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUnitTestGenerator_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUnityExtensions_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUnityExtensions_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusUnityExtensions_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusUnityExtensions_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusVisualDebugger_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusVisualDebugger_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusVisualDebugger_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusVisualDebugger_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusWorkflowTools_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusWorkflowTools_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/NexusWorkflowTools_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NexusWorkflowTools_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/PhysicsBridge_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PhysicsBridge_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/PhysicsBridge_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PhysicsBridge_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/PrefabConverter_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PrefabConverter_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/PrefabConverter_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PrefabConverter_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/Program_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Program_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/Program_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Program_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/Registry_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registry_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/Registry_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registry_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/RemoteDataSynchronizer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RemoteDataSynchronizer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/RemoteDataSynchronizer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RemoteDataSynchronizer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SnapshotDiffViewer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SnapshotDiffViewer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SnapshotDiffViewer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SnapshotDiffViewer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SnapshotManager_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SnapshotManager_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SnapshotManager_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SnapshotManager_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SparseSet_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SparseSet_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/SparseSet_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SparseSet_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/TimeTravelDebugger_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TimeTravelDebugger_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/TimeTravelDebugger_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TimeTravelDebugger_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/UnmanagedComponentAnalyzer_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UnmanagedComponentAnalyzer_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/UnmanagedComponentAnalyzer_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UnmanagedComponentAnalyzer_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/VFXGraphProvider_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VFXGraphProvider_eng
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_References/VFXGraphProvider_tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VFXGraphProvider_tr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract / Executive Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Abstract / Executive Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-value-proposition-why-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Value Proposition: Why Nexus Prime?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-nexus-suite-beyond-the-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nexus Suite: Beyond the Core
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-performance-glossary-foundations-of-modern-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Performance Glossary: Foundations of Modern Systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-paradigm-shift-the-philosophy-of-dod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Paradigm Shift: The Philosophy of DOD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-problem-identification-the-physics-of-inefficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Problem Identification: The Physics of Inefficiency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Problem Identification: The Physics of Inefficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-hardware-crisis-ram-vs-cpu-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Hardware Crisis: RAM vs. CPU Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-reference-crisis-fragmentation-pointer-chasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The Reference Crisis: Fragmentation &amp; Pointer Chasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-deep-dive-memory-topography-contiguity-vs-scattering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Deep Dive: Memory Topography (Contiguity vs. Scattering)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Deep Dive: Memory Topography (Contiguity vs. Scattering)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-c-memory-structures-the-scattered-oop-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 C# Memory Structures: The Scattered OOP Reality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-the-nexus-solution-sequential-contiguity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 The Nexus Solution: Sequential Contiguity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-predictive-memory-modeling-anticipating-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Predictive Memory Modeling: Anticipating Bottlenecks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-nexus-engine-orchestrating-contiguity-the-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Nexus Engine: Orchestrating Contiguity (The "How")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The Nexus Engine: Orchestrating Contiguity (The &#34;How&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-sparseset-the-id-to-direct-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 SparseSet: The ID-to-Direct Bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-swap-and-pop-maintaining-100-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Swap-and-Pop: Maintaining 100% Density
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-alternative-industry-solutions-unity-dots-ecs-vs-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Alternative Industry Solutions: Unity DOTS / ECS vs. Nexus Prime
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Alternative Industry Solutions: Unity DOTS / ECS vs. Nexus Prime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-unity-dots-the-archetype-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Unity DOTS: The Archetype Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-nexus-prime-the-sparseset-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Nexus Prime: The SparseSet Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-zero-gc-management-the-technical-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Zero-GC Management: The Technical Proof
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-logic-orchestration-dag-simd-and-paging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logic Orchestration: DAG, SIMD, and Paging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Logic Orchestration: DAG, SIMD, and Paging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-directed-acyclic-graph-dag-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Directed Acyclic Graph (DAG) Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-simd-avx2-vectorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 SIMD (AVX2) Vectorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-16kb-paging-64-byte-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 16KB Paging &amp; 64-Byte Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-architectural-abstraction-the-dod-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Architectural Abstraction: The DOD Bridge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Architectural Abstraction: The DOD Bridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-comparison-standard-oop-vs-nexus-prime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Comparison: Standard OOP vs. Nexus Prime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-code-archetypes-implementation-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Code Archetypes: Implementation Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-performance-realities-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Performance Realities: Benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-strategic-evaluation-pros-cons-and-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Strategic Evaluation: Pros, Cons, and Risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Strategic Evaluation: Pros, Cons, and Risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-advantages-pros-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Advantages (Pros) &amp; Strengths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-risks-and-weaknesses-cons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Risks and Weaknesses (Cons)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-conclusion-the-philosophical-horizon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Conclusion: The Philosophical Horizon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-memory-management-tactical-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Memory Management &amp; Tactical Lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Memory Management &amp; Tactical Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-the-actor-safety-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 The "Actor" Safety Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-architectural-weakness-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Architectural Weakness Mitigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-the-dispose-pattern-hybrid-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 The Dispose Pattern &amp; Hybrid Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-eliminating-the-point-lookup-tax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Eliminating the Point-Lookup Tax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-strategic-scale-the-freight-train-analogy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 Strategic Scale (The Freight Train Analogy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nexus-prime-a-high-performance-hardware-aware-ecs-architecture-for-real-time-simulations">Nexus Prime: A High-Performance, Hardware-Aware ECS Architecture for Real-Time Simulations<a class="headerlink" href="#nexus-prime-a-high-performance-hardware-aware-ecs-architecture-for-real-time-simulations" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="abstract-executive-summary">Abstract / Executive Summary<a class="headerlink" href="#abstract-executive-summary" title="Permanent link">&para;</a></h2>
+<p>This manifesto details the technical foundations of <strong>Nexus Prime</strong>, an elite Entity Component System (ECS) framework designed to solve the systemic performance bottlenecks of modern high-level managed environments. We analyze the <strong>Memory Wall</strong>, the failure of the <strong>Object-Oriented Paradigm (OOP)</strong> at scale, and the architectural crisis of modern managed runtimes. </p>
+<p>Nexus Prime offers a "Zero-Friction" unmanaged architecture that operates at the theoretical limits of modern CPU architectures while providing a seamless, type-safe bridge to managed environments like Unity.</p>
+<h3 id="the-value-proposition-why-nexus-prime">The Value Proposition: Why Nexus Prime?<a class="headerlink" href="#the-value-proposition-why-nexus-prime" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Advantage</th>
+<th style="text-align: left;">Standard OOP (C#)</th>
+<th style="text-align: left;">Nexus Prime (ECS)</th>
+<th style="text-align: left;">Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Memory Topology</strong></td>
+<td style="text-align: left;">Fragmented Managed Heap</td>
+<td style="text-align: left;">Contiguous Native Buffers</td>
+<td style="text-align: left;">100% Cache Hit Rate vs. Constant Misses</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Stability</strong></td>
+<td style="text-align: left;">Periodic GC Spikes (Stutter)</td>
+<td style="text-align: left;">Zero-GC Allocation</td>
+<td style="text-align: left;">Deterministic Frame Times (No Frame Drops)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Execution Flow</strong></td>
+<td style="text-align: left;">Random Pointer Chasing</td>
+<td style="text-align: left;">Linear Instruction Stream</td>
+<td style="text-align: left;">Maximized Pipelining &amp; Branch Prediction</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Parallelism</strong></td>
+<td style="text-align: left;">Manual Thread Management</td>
+<td style="text-align: left;">Native JobSystem Dispatch</td>
+<td style="text-align: left;">Automatic Work Stealing &amp; SIMD Vectorization</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-nexus-suite-beyond-the-core">The Nexus Suite: Beyond the Core<a class="headerlink" href="#the-nexus-suite-beyond-the-core" title="Permanent link">&para;</a></h3>
+<p>Nexus Prime is more than a storage layer; it is a full-featured high-performance development ecosystem:</p>
+<ul>
+<li><strong>Snapshot Engine</strong>: High-fidelity state serialization allowing for instant save/load and deterministic "Time-Travel" debugging.</li>
+<li><strong>Nexus Query (O(1))</strong>: A reactive query engine that resolves complex multi-component requirements with zero search overhead.</li>
+<li><strong>Integrity Sentinel</strong>: An automated dashboard that fixes file system inconsistencies, detects memory leaks, and ensures unmanaged data integrity.</li>
+<li><strong>Unity Power-Suite</strong>:<ul>
+<li><strong>Nexus Logger</strong>: A multi-sink logging system that pipes data to consoles, files, and live UI with negligible overhead.</li>
+<li><strong>Rich Attributes</strong>: <code>[ReadOnly]</code>, <code>[Required]</code>, and <code>[MustBeUnmanaged]</code> tags to enforce architectural safety at compile time.</li>
+<li><strong>Core Extensions</strong>: Powerful extension suites for <code>String</code>, <code>Math</code>, and <code>Hierarchy</code> manipulation tailored for DOD throughput.</li>
+<li><strong>Advanced Types</strong>: Specialized types like <code>NexusOptional</code> and <code>BitPacked</code> for memory-efficient data representation.</li>
+</ul>
+</li>
+</ul>
+<p>This document serves as a comprehensive technical guide, problem-solution analysis, and philosophical roadmap for high-scale simulation development.</p>
+<hr />
+<h2 id="0-performance-glossary-foundations-of-modern-systems">0. Performance Glossary: Foundations of Modern Systems<a class="headerlink" href="#0-performance-glossary-foundations-of-modern-systems" title="Permanent link">&para;</a></h2>
+<p>To grasp the architectural necessity of Nexus Prime, one must understand the physical constraints of the hardware it operates upon:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Term</th>
+<th style="text-align: left;">Nexus Prime Context</th>
+<th style="text-align: left;">Technical Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>L1/L2/L3 Cache</strong></td>
+<td style="text-align: left;"><strong>Primary Target</strong></td>
+<td style="text-align: left;">Small, extremely fast CPU-internal memory. Nexus aims for 100% hit rates to prevent high-latency DRAM fetches.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cache Miss</strong></td>
+<td style="text-align: left;"><strong>The Nemesis</strong></td>
+<td style="text-align: left;">Occurs when requested data is not in cache, forcing a <span class="arithmatex">\(\sim 100ns\)</span> trip to RAM.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Locality</strong></td>
+<td style="text-align: left;"><strong>Architectural Pillar</strong></td>
+<td style="text-align: left;">Physical proximity of data in RAM. Nexus ensures 100% spatial locality via contiguous buffers.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Instruction Pipelining</strong></td>
+<td style="text-align: left;"><strong>Execution Strategy</strong></td>
+<td style="text-align: left;">Overlapping instruction execution. Nexus use branchless logic to prevent pipeline "bubbles."</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SIMD</strong></td>
+<td style="text-align: left;"><strong>Computational Multiplier</strong></td>
+<td style="text-align: left;">Single Instruction, Multiple Data. Nexus utilizes AVX-256 to transform 8-16 64-bit entities in one cycle.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Memory Barrier</strong></td>
+<td style="text-align: left;"><strong>Safety Guard</strong></td>
+<td style="text-align: left;">Enforces memory operation order. Managed by JobSystem for thread-safe unmanaged access.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TLB</strong></td>
+<td style="text-align: left;"><strong>Paging Optimization</strong></td>
+<td style="text-align: left;">Translation Lookaside Buffer. optimized by Nexus 16KB paging to speed up address translation.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Blittable Type</strong></td>
+<td style="text-align: left;"><strong>The Requirement</strong></td>
+<td style="text-align: left;">Data that has the same representation in both managed and unmanaged memory.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-the-paradigm-shift-the-philosophy-of-dod">1. The Paradigm Shift: The Philosophy of DOD<a class="headerlink" href="#1-the-paradigm-shift-the-philosophy-of-dod" title="Permanent link">&para;</a></h2>
+<p>Traditional game development relies on <strong>Object-Oriented Programming (OOP)</strong>, where data and logic are encapsulated together. While intuitive for humans, OOP is fundamentally mismatched for modern hardware. <strong>Data-Oriented Design (DOD)</strong> shifts the focus from "What an object is" to "What the data does."</p>
+<hr />
+<h2 id="2-problem-identification-the-physics-of-inefficiency">2. Problem Identification: The Physics of Inefficiency<a class="headerlink" href="#2-problem-identification-the-physics-of-inefficiency" title="Permanent link">&para;</a></h2>
+<h3 id="21-the-hardware-crisis-ram-vs-cpu-memory">2.1 The Hardware Crisis: RAM vs. CPU Memory<a class="headerlink" href="#21-the-hardware-crisis-ram-vs-cpu-memory" title="Permanent link">&para;</a></h3>
+<p>The "Memory Wall" is the divergence between CPU speed and RAM latency. Since 1980, CPUs became <span class="arithmatex">\(\sim 10,000\%\)</span> faster, while RAM only <span class="arithmatex">\(\sim 10\%\)</span>.</p>
+<p><strong>The Latency Gap (Physical Reality):</strong>
+<pre class="mermaid"><code>graph LR
+    CPU((CPU)) --- L1[L1 Cache: 1ns]
+    L1 --- L2[L2 Cache: 4ns]
+    L2 --- L3[L3 Cache: 15ns]
+    L3 --- DRAM[DRAM: 100ns]
+    DRAM --- NET[NETWORK: 10ms]
+
+    style CPU fill:#f96
+    style DRAM fill:#3399ff
+</code></pre></p>
+<p><strong>Stall Mathematics:</strong>
+$<span class="arithmatex">\(Stall \% = MissRate \times Latency_{RAM}\)</span>$</p>
+<h3 id="22-the-reference-crisis-fragmentation-pointer-chasing">2.2 The Reference Crisis: Fragmentation &amp; Pointer Chasing<a class="headerlink" href="#22-the-reference-crisis-fragmentation-pointer-chasing" title="Permanent link">&para;</a></h3>
+<p>In standard C#, a class instance is a reference.</p>
+<ul>
+<li><strong>Pointer Chasing</strong>: Every <code>unit.transform.position</code> access requires solving 3 pointers in sequence. The CPU cannot "pre-fetch" these because it doesn't know the address of the next pointer until the current one is fetched.</li>
+<li><strong>Heap Fragmentation</strong>: Managed objects are placed wherever the GC finds space. Over time, the heap looks like Swiss cheese, ensuring every object fetch is a Cache Miss.</li>
+</ul>
+<hr />
+<h2 id="3-deep-dive-memory-topography-contiguity-vs-scattering">3. Deep Dive: Memory Topography (Contiguity vs. Scattering)<a class="headerlink" href="#3-deep-dive-memory-topography-contiguity-vs-scattering" title="Permanent link">&para;</a></h2>
+<h3 id="31-c-memory-structures-the-scattered-oop-reality">3.1 C# Memory Structures: The Scattered OOP Reality<a class="headerlink" href="#31-c-memory-structures-the-scattered-oop-reality" title="Permanent link">&para;</a></h3>
+<p>In C#, reference types (<code>class</code>) allocate memory dynamically on the Managed Heap, connected by a web of pointers.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// The C# OOP Approach (Scattered in Memory)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">UnitOOP</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="p">;</span><span class="w">         </span><span class="c1">// 4 bytes</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="p">;</span><span class="w">    </span><span class="c1">// Pointer (8 bytes) -&gt; Heap Address 2</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Transform</span><span class="w"> </span><span class="n">Data</span><span class="p">;</span><span class="w"> </span><span class="c1">// Pointer (8 bytes) -&gt; Heap Address 3</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">UnitOOP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">army</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">UnitOOP</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// Array of Pointers -&gt; Heap Address 1</span>
+</code></pre></div>
+<p><strong>Schema: Standard C# Managed Heap Layout</strong></p>
+<pre class="mermaid"><code>graph TD
+    subgraph Managed_Heap_Scattered
+        List[List Array of Pointers] --&gt;|Ptr 1| ObjA[UnitOOP A @0x1000]
+        List --&gt;|Ptr 2| ObjB[UnitOOP B @0x8F20]
+        List --&gt;|Ptr 3| ObjC[UnitOOP C @0x2A40]
+
+        ObjA --&gt;|Ptr| TransA[Transform Data @0x1050]
+        ObjB --&gt;|Ptr| TransB[Transform Data @0x9000]
+        ObjC --&gt;|Ptr| TransC[Transform Data @0x3010]
+    end
+    style List fill:#f9d0c4
+    style ObjA fill:#ff9999
+    style ObjB fill:#ff9999
+    style ObjC fill:#ff9999
+</code></pre>
+<h3 id="32-the-nexus-solution-sequential-contiguity">3.2 The Nexus Solution: Sequential Contiguity<a class="headerlink" href="#32-the-nexus-solution-sequential-contiguity" title="Permanent link">&para;</a></h3>
+<p>Nexus eliminates the pointer web by using strictly unmanaged, blittable structs stored in linear native memory buffers.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// The Nexus Approach (Sequential in Memory)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">[StructLayout(LayoutKind.Sequential)]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">public</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">UnitData</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="p">;</span><span class="w">         </span><span class="c1">// 4 bytes</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">Pos</span><span class="p">;</span><span class="w">    </span><span class="c1">// 12 bytes</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span><span class="w"> </span><span class="c1">// Total: Exactly 16 bytes. Blittable.</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">ChunkedBuffer</span><span class="o">&lt;</span><span class="n">UnitData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">armyData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChunkedBuffer</span><span class="o">&lt;</span><span class="n">UnitData</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">// 1 Contiguous Block of Native Memory</span>
+</code></pre></div>
+<p><strong>Schema: Nexus Unmanaged Linear Layout</strong></p>
+<pre class="mermaid"><code>graph LR
+    subgraph Unmanaged_Native_Memory_Nexus
+        direction LR
+        Block1[UnitData A &lt;br/&gt; 16 Bytes] --- Block2[UnitData B &lt;br/&gt; 16 Bytes] --- Block3[UnitData C &lt;br/&gt; 16 Bytes] --- Block4[UnitData D &lt;br/&gt; 16 Bytes]
+    end
+    subgraph CPU_Cache_Line_64_Bytes
+        direction LR
+        Cache[Fetches A, B, C, and D in exactly 1 CPU Cycle]
+    end
+    Block1 -.-&gt; Cache
+    Block4 -.-&gt; Cache
+    style Block1 fill:#c4f9d0
+    style Block2 fill:#c4f9d0
+    style Block3 fill:#c4f9d0
+    style Block4 fill:#c4f9d0
+    style Cache fill:#99ff99
+</code></pre>
+<p><strong>Instruction Efficiency Math:</strong>
+For a 64-byte Cache Line and a 16-byte component:
+$<span class="arithmatex">\(\frac{64 \ bytes}{16 \ bytes} = 4 \ Entities/Line\)</span>$</p>
+<p>Nexus fetches 4 entities at once. OOP fetches 1 entity (plus 48 bytes of garbage data), wasting  of the bandwidth and forcing  more memory trips.</p>
+<h3 id="33-predictive-memory-modeling-anticipating-bottlenecks">3.3 Predictive Memory Modeling: Anticipating Bottlenecks<a class="headerlink" href="#33-predictive-memory-modeling-anticipating-bottlenecks" title="Permanent link">&para;</a></h3>
+<p>Even in contiguous arrays, hidden hardware flaws can destroy performance if not predicted. Nexus Engine explicitly designs against two major hardware bottlenecks: <strong>Cache Straddling</strong> and <strong>False Sharing</strong>.</p>
+<p><strong>Predictive Schema 1: Cache Straddling (Unaligned Data Penalty)</strong>
+When a struct is not aligned to cache line boundaries, reading a single entity requires fetching <em>two</em> separate cache lines from L2/L3, instantly halving performance. Nexus predicts and prevents this via strict 64-byte padded allocations.</p>
+<pre class="mermaid"><code>graph TD
+    subgraph Bad_Alignment_Cache_Straddling
+        Line1[Cache Line 1: 64 Bytes] --- StructA[Entity 1: 40 Bytes]
+        Line1 --- Split[Entity 2 Part 1: 24 Bytes]
+        Line2[Cache Line 2: 64 Bytes] --- Split2[Entity 2 Part 2: 16 Bytes]
+        Line2 --- StructC[Entity 3: 40 Bytes]
+        Split -.-&gt; |Requires 2 fetches for 1 Entity!| Alert((STALL))
+    end
+    style Alert fill:#ff4444,color:#fff
+</code></pre>
+<p><strong>Predictive Schema 2: False Sharing (Multithreading Collision)</strong>
+If Core A writes to <code>Entity 1</code> and Core B writes to <code>Entity 2</code>, but both entities sit on the <em>same 64-byte Cache Line</em>, the CPU forces an artificial lock, causing severe thread stalling. Nexus prevents this by chunking data far apart for different worker threads.</p>
+<pre class="mermaid"><code>graph LR
+    Core1((CPU Core 1)) --&gt;|Writes| E1[Entity 1]
+    Core2((CPU Core 2)) --&gt;|Writes| E2[Entity 2]
+
+    subgraph Same_Cache_Line_64B
+        E1 --- E2
+    end
+
+    Core1 -.-&gt; |Hardware Lock Triggered!| Core2
+    style Same_Cache_Line_64B fill:#ffcccc
+</code></pre>
+<hr />
+<h2 id="4-the-nexus-engine-orchestrating-contiguity-the-how">4. The Nexus Engine: Orchestrating Contiguity (The "How")<a class="headerlink" href="#4-the-nexus-engine-orchestrating-contiguity-the-how" title="Permanent link">&para;</a></h2>
+<h3 id="41-sparseset-the-id-to-direct-bridge">4.1 SparseSet: The ID-to-Direct Bridge<a class="headerlink" href="#41-sparseset-the-id-to-direct-bridge" title="Permanent link">&para;</a></h3>
+<p>Nexus uses <strong>SparseSets</strong> to marry ID-based accessibility with array-based performance.</p>
+<ul>
+<li><strong>Sparse Array</strong>: Indexed by Entity ID. Stores the index in the Dense Array.</li>
+<li><strong>Dense Array</strong>: Stores the actual raw component data. This is what the CPU iterates over.</li>
+</ul>
+<h3 id="42-swap-and-pop-maintaining-100-density">4.2 Swap-and-Pop: Maintaining 100% Density<a class="headerlink" href="#42-swap-and-pop-maintaining-100-density" title="Permanent link">&para;</a></h3>
+<p>To prevent holes when an entity is deleted in C#, arrays usually leave a <code>null</code> gap, causing a cache miss during iteration. Nexus uses <strong>Swap-and-Pop</strong>.</p>
+<p><strong>Schema: Swap-and-Pop Mechanism</strong></p>
+<pre class="mermaid"><code>stateDiagram-v2
+    direction LR
+    state "Before Deletion (Dense Array)" as S1 {
+        [A] --&gt; [B] --&gt; [C] --&gt; [D]
+    }
+    state "Deleting Entity 'B'" as S2 {
+        [A] --&gt; [Empty] --&gt; [C] --&gt; [D]
+    }
+    state "Swap-and-Pop Action" as S3 {
+        [A] --&gt; [D_Moves_Here] --&gt; [C] --&gt; [Removed]
+    }
+    state "After Deletion" as S4 {
+        [A] --&gt; [D] --&gt; [C]
+    }
+    S1 --&gt; S2
+    S2 --&gt; S3
+    S3 --&gt; S4
+</code></pre>
+<p><strong>Mathematical Proof of Density:</strong>
+$<span class="arithmatex">\(Density_{Buffer} = \frac{N}{Capacity} = 100\%\)</span>$</p>
+<hr />
+<h2 id="5-alternative-industry-solutions-unity-dots-ecs-vs-nexus-prime">5. Alternative Industry Solutions: Unity DOTS / ECS vs. Nexus Prime<a class="headerlink" href="#5-alternative-industry-solutions-unity-dots-ecs-vs-nexus-prime" title="Permanent link">&para;</a></h2>
+<p>To contextualize Nexus Prime, we must compare it against mainstream ECS frameworks, specifically <strong>Unity DOTS (Entities)</strong>. While both solve the OOP memory fragmentation problem, they use fundamentally different internal architectures.</p>
+<h3 id="51-unity-dots-the-archetype-architecture">5.1 Unity DOTS: The Archetype Architecture<a class="headerlink" href="#51-unity-dots-the-archetype-architecture" title="Permanent link">&para;</a></h3>
+<p>Unity uses <strong>Archetypes</strong>. Entities with the exact same combination of components are grouped into the same physical 16KB memory "Chunk".</p>
+<ul>
+<li><strong>The Flaw (Structural Changes):</strong> If you add a "Poisoned" component to a single "Unit", Unity must move that entire unit's data from the "Unit" chunk to a new "Unit + Poisoned" chunk. This stalls multithreading and triggers massive memory copying.</li>
+</ul>
+<h3 id="52-nexus-prime-the-sparseset-architecture">5.2 Nexus Prime: The SparseSet Architecture<a class="headerlink" href="#52-nexus-prime-the-sparseset-architecture" title="Permanent link">&para;</a></h3>
+<p>Nexus isolates components into individual arrays. A "Unit" is just an ID. Its <code>Position</code> lives in the Position array, and its <code>Health</code> lives in the Health array.</p>
+<ul>
+<li><strong>The Advantage (Frictionless Composition):</strong> Adding a "Poisoned" component to a Unit simply involves writing data to the end of the <code>Poisoned</code> array. The entity's Position and Health data <em>never moves</em>. No structural changes, no pipeline stalls.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Unity DOTS (Archetype)</th>
+<th>Nexus Prime (SparseSet)</th>
+<th>Difference Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Component Layout</strong></td>
+<td>Grouped by Entity type in Chunks</td>
+<td>Isolated arrays per Component type</td>
+<td>Nexus iterates single components faster (no interlacing).</td>
+</tr>
+<tr>
+<td><strong>Adding/Removing Components</strong></td>
+<td><strong>Very Slow</strong> (Structural Change, copy data)</td>
+<td><strong>Instant</strong> (Array append, no moving)</td>
+<td>Nexus excels in highly dynamic games with rapid state changes.</td>
+</tr>
+<tr>
+<td><strong>Multithreaded Queries</strong></td>
+<td>High complexity (Sync Points required)</td>
+<td>Lock-free component arrays</td>
+<td>Nexus minimizes pipeline bubbles during state changes.</td>
+</tr>
+<tr>
+<td><strong>Query Iteration</strong></td>
+<td>Perfect cache locality across multiple comps</td>
+<td>Slight penalty for cross-component ID lookup</td>
+<td>Unity is faster when reading 5+ components simultaneously; Nexus is faster for isolated systems.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-zero-gc-management-the-technical-proof">6. Zero-GC Management: The Technical Proof<a class="headerlink" href="#6-zero-gc-management-the-technical-proof" title="Permanent link">&para;</a></h2>
+<p>Nexus achieves Zero-GC by using <code>NativeMemory.Alloc</code>.</p>
+<ul>
+<li><strong>The Mechanism</strong>: By using <code>blittable structs</code>, we ensure the GC root-scanner never has to "walk" these memory blocks.</li>
+<li><strong>The Result</strong>: 10GB of simulation data has exactly the same GC pressure as 10KB.</li>
+</ul>
+<hr />
+<h2 id="7-logic-orchestration-dag-simd-and-paging">7. Logic Orchestration: DAG, SIMD, and Paging<a class="headerlink" href="#7-logic-orchestration-dag-simd-and-paging" title="Permanent link">&para;</a></h2>
+<h3 id="71-directed-acyclic-graph-dag-scaling">7.1 Directed Acyclic Graph (DAG) Scaling<a class="headerlink" href="#71-directed-acyclic-graph-dag-scaling" title="Permanent link">&para;</a></h3>
+<p>Nexus uses <strong>Kahn's Algorithm</strong> to solve dependencies.</p>
+<ul>
+<li><strong>Theorem</strong>: If <span class="arithmatex">\(S_1 \cap S_2 = \emptyset\)</span>, then <span class="arithmatex">\(S_1\)</span> and <span class="arithmatex">\(S_2\)</span> can execute in parallel.</li>
+<li><strong>Result</strong>: Automatic, lock-free parallelization across all available CPU cores.</li>
+</ul>
+<h3 id="72-simd-avx2-vectorization">7.2 SIMD (AVX2) Vectorization<a class="headerlink" href="#72-simd-avx2-vectorization" title="Permanent link">&para;</a></h3>
+<p>Filtering through millions of entities with <code>if</code> is a branch-prediction disaster.</p>
+<ul>
+<li><strong>Nexus Approach</strong>: Uses bitwise operations on 256-bit registers. Process 32 filters in 1 instruction.</li>
+<li><strong>Formula</strong>: <span class="arithmatex">\(S = B(C_1) \ \&amp; \ B(C_2) \dots \ \&amp; \ B(C_n)\)</span></li>
+</ul>
+<h3 id="73-16kb-paging-64-byte-alignment">7.3 16KB Paging &amp; 64-Byte Alignment<a class="headerlink" href="#73-16kb-paging-64-byte-alignment" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>16KB Paging</strong>: Matches 4 typical OS memory pages, maximizing TLB cache hits.</li>
+<li><strong>64-Byte Alignment</strong>: Ensures every component fits perfectly into a CPU Cache Line. Crossing a cache line boundary doubles access cost.</li>
+</ul>
+<h2 id="8-architectural-abstraction-the-dod-bridge">8. Architectural Abstraction: The DOD Bridge<a class="headerlink" href="#8-architectural-abstraction-the-dod-bridge" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime abstracts the brutal complexity of hardware-aware programming into a clean, intent-based API. It provides the performance of low-level C++ with the safety and ergonomics of C#.</p>
+<h3 id="81-comparison-standard-oop-vs-nexus-prime">8.1 Comparison: Standard OOP vs. Nexus Prime<a class="headerlink" href="#81-comparison-standard-oop-vs-nexus-prime" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Standard OOP (C#)</th>
+<th style="text-align: left;">Nexus Prime (DOD)</th>
+<th style="text-align: left;">Technical Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Identity</strong></td>
+<td style="text-align: left;">Object Reference (8 bytes pointer)</td>
+<td style="text-align: left;"><code>EntityId</code> (8 bytes integer)</td>
+<td style="text-align: left;">Zero indirect lookups; ID remains stable even if data moves.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Logic</strong></td>
+<td style="text-align: left;">Encapsulated in objects (Update())</td>
+<td style="text-align: left;">Decoupled in Systems (Execute())</td>
+<td style="text-align: left;">Better instruction cache reuse; systems only touch required data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage</strong></td>
+<td style="text-align: left;">Scattered on Managed Heap</td>
+<td style="text-align: left;">Packed in Contiguous Native Buffers</td>
+<td style="text-align: left;">100% Cache Line utilization; prefetcher can predict next data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lifecycle</strong></td>
+<td style="text-align: left;">GC Managed (Non-deterministic)</td>
+<td style="text-align: left;">Manual/Pool Managed (Deterministic)</td>
+<td style="text-align: left;">Eliminates stutters; Zero GC throughput impact.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-code-archetypes-implementation-patterns">8.2 Code Archetypes: Implementation Patterns<a class="headerlink" href="#82-code-archetypes-implementation-patterns" title="Permanent link">&para;</a></h3>
+<p>Standard OOP loops are unpredictable due to the "Reference Crisis." Nexus forces the CPU into a linear, high-speed execution flow.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// The OOP Disaster (High Latency)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">army</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// 3 separate Cache Misses per access (unit -&gt; transform -&gt; position)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">unit</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">// The Nexus Advantage (Peak Throughput)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">NexusHelper</span><span class="p">.</span><span class="n">ForEach</span><span class="p">((</span><span class="k">ref</span><span class="w"> </span><span class="n">Position</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="c1">// 100% Cache Hit. Data is streamed continuously from RAM to L1.</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">});</span>
+</code></pre></div>
+<hr />
+<h2 id="9-performance-realities-benchmarks">9. Performance Realities: Benchmarks<a class="headerlink" href="#9-performance-realities-benchmarks" title="Permanent link">&para;</a></h2>
+<p>Verified results from the <a href="https://github.com/gkhanC/Nexus/blob/master/Documents/Manuals/Benchmarks_eng.md">Benchmark Whitepaper</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Managed C# (Unity)</th>
+<th>Nexus Prime</th>
+<th>Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lifecycle (100k)</strong></td>
+<td>840.0 ms</td>
+<td>8.0 ms</td>
+<td><strong>105.0x</strong></td>
+</tr>
+<tr>
+<td><strong>Update Iteration</strong></td>
+<td>12.4 ms</td>
+<td>0.2 ms</td>
+<td><strong>62.0x</strong></td>
+</tr>
+<tr>
+<td><strong>Math (10M Ops)</strong></td>
+<td>480.0 ms</td>
+<td>42.0 ms</td>
+<td><strong>11.4x</strong></td>
+</tr>
+<tr>
+<td><strong>Memory Allocation</strong></td>
+<td>450 KB / Frame</td>
+<td><strong>0 KB / Frame</strong></td>
+<td><strong>INF (Zero-GC)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-strategic-evaluation-pros-cons-and-risks">10. Strategic Evaluation: Pros, Cons, and Risks<a class="headerlink" href="#10-strategic-evaluation-pros-cons-and-risks" title="Permanent link">&para;</a></h2>
+<h3 id="101-advantages-pros-strengths">10.1 Advantages (Pros) &amp; Strengths<a class="headerlink" href="#101-advantages-pros-strengths" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Unlimited Scale</strong>: Sims that were physically impossible in OOP become trivial.</li>
+<li><strong>Predictable Stability</strong>: Zero GC spikes means zero "unexplained stuttering."</li>
+<li><strong>Direct Hardware Control</strong>: High-precision AVX/SSE usage.</li>
+</ul>
+<h3 id="102-risks-and-weaknesses-cons">10.2 Risks and Weaknesses (Cons)<a class="headerlink" href="#102-risks-and-weaknesses-cons" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Manuel Cleanup</strong>: Forgetting to call <code>Dispose()</code> leads to unmanaged memory leaks.</li>
+<li><strong>Point-Lookup Tax</strong>: SparseSet lookup used for random <code>Get</code> is slower than direct array access (3.4x slower).</li>
+<li><strong>Small Scale Friction</strong>: Setup overhead for  entities outweighs execution gains.</li>
+</ul>
+<hr />
+<h2 id="11-conclusion-the-philosophical-horizon">11. Conclusion: The Philosophical Horizon<a class="headerlink" href="#11-conclusion-the-philosophical-horizon" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime is a commitment to hardware respect. It changes your coding habits from "Creating objects" to "Orchestrating data." By aligning software logic with the physical laws of the CPU, it transforms performance from a "best-effort" outcome into a deterministic mathematical certainty.</p>
+<hr />
+<h2 id="12-memory-management-tactical-lifecycle">12. Memory Management &amp; Tactical Lifecycle<a class="headerlink" href="#12-memory-management-tactical-lifecycle" title="Permanent link">&para;</a></h2>
+<p>In a Zero-GC architecture, memory safety is shifted from the runtime to the architect. Explicit disposal is the physical price of extreme performance.</p>
+<h3 id="121-the-actor-safety-pattern">12.1 The "Actor" Safety Pattern<a class="headerlink" href="#121-the-actor-safety-pattern" title="Permanent link">&para;</a></h3>
+<p>When bridging OOP and DOD, unmanaged data must be tethered to managed lifecycles.
+* <strong>Registry Disposal</strong>: The <code>Registry.Dispose()</code> call safely deallocates all entities and components.
+* <strong>Hybrid Disposal</strong>: Managed objects (MonoBehaviours) owning unmanaged identity must implement <code>IDisposable</code> to ensure Swap-and-Pop density is maintained even when objects are destroyed.</p>
+<h3 id="122-architectural-weakness-mitigation">12.2 Architectural Weakness Mitigation<a class="headerlink" href="#122-architectural-weakness-mitigation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Solving Point-Lookup Tax</strong>: While <code>SparseSet.Get</code> is <span class="arithmatex">\(O(1)\)</span>, its non-sequential access pattern is a hardware bottleneck. High-throughput systems must bypass the Registry's random access and operate directly on the packed <strong>Dense Array</strong>.</li>
+<li><strong>Scale Friction</strong>: Nexus is optimized for throughput over latency. For scenarios involving <span class="arithmatex">\(&lt; 100\)</span> entities, the orchestration overhead (Job scheduling, Sync Points) exceeds execution gains. Recommend hybrid buffers for small-scale UI logic.</li>
+</ul>
+<h3 id="123-the-dispose-pattern-hybrid-classes">12.3 The Dispose Pattern &amp; Hybrid Classes<a class="headerlink" href="#123-the-dispose-pattern-hybrid-classes" title="Permanent link">&para;</a></h3>
+<p>In a hybrid environment like Unity, <code>IDisposable</code> is your safety net.
+* <strong>Registry Ownership</strong>: The <code>Registry</code> owns high-level unmanaged buffers. Disposing it kills all entity/component memory safely.
+* <strong>Actor Pattern</strong>: Managed classes owning unmanaged data MUST implement <code>Dispose</code>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_entity</span><span class="p">.</span><span class="n">IsNull</span><span class="p">)</span><span class="w"> </span><span class="n">_registry</span><span class="p">.</span><span class="n">Destroy</span><span class="p">(</span><span class="n">_entity</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">_unmanagedList</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span><span class="w"> </span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">GC</span><span class="p">.</span><span class="n">SuppressFinalize</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="124-eliminating-the-point-lookup-tax">12.4 Eliminating the Point-Lookup Tax<a class="headerlink" href="#124-eliminating-the-point-lookup-tax" title="Permanent link">&para;</a></h3>
+<p>While <code>Registry.Get&lt;T&gt;</code> is <span class="arithmatex">\(O(1)\)</span>, scattered lookups incur a latency penalty compared to linear iteration.
+* <strong>Strategy</strong>: Always prioritize <strong>Sequential System Access</strong>. In an <code>INexusSystem</code>, the CPU prefetcher fetches component arrays into L1 cache before you even request them.
+* <strong>Rule</strong>: Use <code>Get</code> for reactive-only logic; use <code>Systems</code> for high-frequency simulation logic.</p>
+<h3 id="125-strategic-scale-the-freight-train-analogy">12.5 Strategic Scale (The Freight Train Analogy)<a class="headerlink" href="#125-strategic-scale-the-freight-train-analogy" title="Permanent link">&para;</a></h3>
+<p>Nexus is a high-bandwidth engine. 
+* <strong>Small Scale (&lt; 100 Entities)</strong>: Standard OOP is often faster due to lower management overhead.
+* <strong>Large Scale (&gt; 1000 Entities)</strong>: Nexus becomes essential. The cost of manual management is negated by the elimination of GC spikes and cache misses.</p>
+<hr />
+<hr />
+<hr />
+<h1 id="nexus-prime-gercek-zamanl-simulasyonlar-icin-yuksek-performansl-donanm-duyarl-ecs-mimarisi">Nexus Prime: Gerçek Zamanlı Simülasyonlar İçin Yüksek Performanslı, Donanım Duyarlı ECS Mimarisi<a class="headerlink" href="#nexus-prime-gercek-zamanl-simulasyonlar-icin-yuksek-performansl-donanm-duyarl-ecs-mimarisi" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="ozet-yonetici-ozeti">Özet / Yönetici Özeti<a class="headerlink" href="#ozet-yonetici-ozeti" title="Permanent link">&para;</a></h2>
+<p>Bu manifesto, <strong>Nexus Prime</strong>'ın teknik temellerini ve modern managed (yönetilen) dillerdeki sistemik performans darboğazlarını nasıl aştığını detaylandırmaktadır. <strong>Bellek Duvarı</strong> (Memory Wall), <strong>Nesne Yönelimli Programlamanın</strong> (OOP) ölçek krizleri ve modern çalışma zamanlarının mimari çıkmazlarını analiz ediyoruz.</p>
+<p>Nexus Prime, CPU'nun teorik sınırlarında çalışan "Sıfır-Sürtünmeli" (Zero-Friction) bir unmanaged mimari sunarken, Unity gibi managed ortamlar için kesintisiz ve tip-güvenli bir köprü oluşturur.</p>
+<h3 id="deger-onerisi-neden-nexus-prime">Değer Önerisi: Neden Nexus Prime?<a class="headerlink" href="#deger-onerisi-neden-nexus-prime" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Avantaj</th>
+<th style="text-align: left;">Standart OOP (C#)</th>
+<th style="text-align: left;">Nexus Prime (ECS)</th>
+<th style="text-align: left;">Etki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bellek Topolojisi</strong></td>
+<td style="text-align: left;">Dağınık Managed Heap</td>
+<td style="text-align: left;">Bitişik Native Tamponlar</td>
+<td style="text-align: left;">%100 Önbellek İsabeti (Cache Hit)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Kararlılık</strong></td>
+<td style="text-align: left;">Periyodik GC Takılmaları</td>
+<td style="text-align: left;">Sıfır-GC Tahsisi</td>
+<td style="text-align: left;">Deterministik Kare Süreleri (Drop Yok)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Yürütme Akışı</strong></td>
+<td style="text-align: left;">Rastgele İşaretçi Takibi</td>
+<td style="text-align: left;">Doğrusal Komut Akışı</td>
+<td style="text-align: left;">Maksimum Pipeline ve Tahmin Verimliliği</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Paralellik</strong></td>
+<td style="text-align: left;">Manuel Thread Yönetimi</td>
+<td style="text-align: left;">Native JobSystem Dağıtımı</td>
+<td style="text-align: left;">Otomatik Work-Stealing ve SIMD Desteği</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nexus-suite-cekirdegin-otesi">Nexus Suite: Çekirdeğin Ötesi<a class="headerlink" href="#nexus-suite-cekirdegin-otesi" title="Permanent link">&para;</a></h3>
+<p>Nexus Prime sadece bir depolama katmanı değil, tam donanımlı bir yüksek performanslı geliştirme ekosistemidir:</p>
+<ul>
+<li><strong>Snapshot Motoru</strong>: Anlık kaydetme/yükleme ve deterministik "Zaman Yolculuğu" hata ayıklamasına olanak tanıyan yüksek doğruluklu durum serileştirme.</li>
+<li><strong>Nexus Query (O(1))</strong>: Karmaşık çoklu bileşen gereksinimlerini sıfır arama maliyetiyle çözen reaktif bir sorgu motoru.</li>
+<li><strong>Integrity Sentinel</strong>: Dosya sistemi tutarsızlıklarını düzelten, bellek sızıntılarını tespit eden ve unmanaged veri bütünlüğünü sağlayan otomatik dashboad.</li>
+<li><strong>Unity Güç Paketi</strong>:<ul>
+<li><strong>Nexus Logger</strong>: Konsol, dosya ve canlı UI'a ihmal edilebilir yükle veri aktaran çok kanallı günlükleme sistemi.</li>
+<li><strong>Zengin Attributelar</strong>: Mimari güvenliği derleme zamanında zorunlu kılan <code>[ReadOnly]</code>, <code>[Required]</code> ve <code>[MustBeUnmanaged]</code> etiketleri.</li>
+<li><strong>Genişletme Metotları</strong>: DOD verimliliği için özelleştirilmiş <code>String</code>, <code>Math</code> ve <code>Hierarchy</code> manipülasyon suitleri.</li>
+<li><strong>Gelişmiş Tipler</strong>: Bellek verimliliği için <code>NexusOptional</code> ve <code>BitPacked</code> gibi özelleştirilmiş veri yapıları.</li>
+</ul>
+</li>
+</ul>
+<p>Bu doküman, yüksek ölçekli simülasyon geliştirme için kapsamlı bir teknik rehber, sorun-çözüm analizi ve felsefi yol haritasıdır.</p>
+<hr />
+<h2 id="0-performans-sozlugu-modern-sistem-temelleri">0. Performans Sözlüğü: Modern Sistem Temelleri<a class="headerlink" href="#0-performans-sozlugu-modern-sistem-temelleri" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime'ın mimari gerekliliğini kavramak için, üzerinde çalıştığı donanımın fiziksel kısıtlamaları anlaşılmalıdır:</p>
+<table>
+<thead>
+<tr>
+<th>Terim</th>
+<th>Nexus Prime Bağlamı</th>
+<th>Teknik Tanım</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1/L2/L3 Cache</strong></td>
+<td><strong>Birincil Hedef</strong></td>
+<td>Küçük, son derece hızlı CPU-içi bellek. Nexus yüksek gecikmeli DRAM çağrılarını önlemek için %100 isabet oranını hedefler.</td>
+</tr>
+<tr>
+<td><strong>Cache Miss</strong></td>
+<td><strong>Düşman</strong></td>
+<td>İstenen verinin önbellekte bulunamaması ve RAM'e 100ns'lik bir seyahat yapılması.</td>
+</tr>
+<tr>
+<td><strong>Veri Yerelliği</strong></td>
+<td><strong>Mimari Sütun</strong></td>
+<td>Verilerin RAM'deki fiziksel yakınlığı. Nexus bitişik arabelleklerle %100 mekansal yerellik sağlar.</td>
+</tr>
+<tr>
+<td><strong>Komut Hattı</strong></td>
+<td><strong>Yürütme Stratejisi</strong></td>
+<td>CPU'nun komutları iç içe işlemesi. Nexus dallanmasız mantık ile hat tıkanıklıklarını önler.</td>
+</tr>
+<tr>
+<td><strong>SIMD</strong></td>
+<td><strong>Hesaplama Çarpanı</strong></td>
+<td>Tek Komut, Çoklu Veri. Nexus 8-16 adet 64-bitlik varlığı tek döngüde işlemek için AVX-256 kullanır.</td>
+</tr>
+<tr>
+<td><strong>Memory Barrier</strong></td>
+<td><strong>Güvenlik Kalkanı</strong></td>
+<td>Bellek işlem sırasını zorunlu kılar. İş parçacığı güvenli unmanaged erişim için JobSystem tarafından yönetilir.</td>
+</tr>
+<tr>
+<td><strong>TLB</strong></td>
+<td><strong>Sayfalama Optimizasyonu</strong></td>
+<td>Bellek adresi dönüştürme önbelleği. Nexus 16KB sayfalama ile adres dönüştürmeyi hızlandırır.</td>
+</tr>
+<tr>
+<td><strong>Blittable Type</strong></td>
+<td><strong>Kesin Koşul</strong></td>
+<td>Hem managed hem unmanaged bellekte aynı fiziksel yapıya sahip veri türü.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-paradigma-degisimi-veri-odakl-tasarm-dod-felsefesi">1. Paradigma Değişimi: Veri Odaklı Tasarım (DOD) Felsefesi<a class="headerlink" href="#1-paradigma-degisimi-veri-odakl-tasarm-dod-felsefesi" title="Permanent link">&para;</a></h2>
+<p>Geleneksel oyun geliştirme, veri ve mantığın bir arada kapsüllendiği <strong>Nesne Yönelimli Programlamaya (OOP)</strong> dayanır. İnsan zihni için sezgisel olsa da, OOP modern donanım için temelden uyumsuzdur. <strong>Veri Odaklı Tasarım (DOD)</strong>, odağı "Bir nesne nedir?" sorusundan "Veri ne yapar?" sorusuna kaydırır.</p>
+<hr />
+<h2 id="2-sorun-tespiti-verimsizligin-fizigi">2. Sorun Tespiti: Verimsizliğin Fiziği<a class="headerlink" href="#2-sorun-tespiti-verimsizligin-fizigi" title="Permanent link">&para;</a></h2>
+<h3 id="21-donanm-krizi-ram-vs-cpu-bellegi">2.1 Donanım Krizi: RAM vs. CPU Belleği<a class="headerlink" href="#21-donanm-krizi-ram-vs-cpu-bellegi" title="Permanent link">&para;</a></h3>
+<p>"Bellek Duvarı", CPU hızı ile RAM gecikmesi arasındaki ayrışmadır. 1980'den bu yana CPU'lar  hızlanırken, RAM yalnızca  hızlanmıştır.</p>
+<p><strong>Gecikme Uçurumu (Fiziksel Gerçeklik):</strong></p>
+<pre class="mermaid"><code>graph LR
+    CPU((CPU)) --- L1[L1 Cache: 1ns]
+    L1 --- L2[L2 Cache: 4ns]
+    L2 --- L3[L3 Cache: 15ns]
+    L3 --- DRAM[DRAM: 100ns]
+    DRAM --- NET[NETWORK: 10ms]
+
+    style CPU fill:#f96
+    style DRAM fill:#3399ff
+</code></pre>
+<p><strong>Duraksama Matematiği:</strong>
+$<span class="arithmatex">\(Duraksama \% = IskalamaOrani \times Gecikme_{RAM}\)</span>$</p>
+<h3 id="22-referans-krizi-parcalanma-ve-isaretci-takibi">2.2 Referans Krizi: Parçalanma ve İşaretçi Takibi<a class="headerlink" href="#22-referans-krizi-parcalanma-ve-isaretci-takibi" title="Permanent link">&para;</a></h3>
+<p>Standart C#'ta bir sınıf (class) örneği bir referanstır.</p>
+<ul>
+<li><strong>İşaretçi Takibi (Pointer Chasing)</strong>: Her <code>unit.transform.position</code> erişimi, sırayla 3 işaretçinin çözülmesini gerektirir. CPU mevcut işaretçi getirilene kadar bir sonrakinin adresini bilmediği için bunları "önceden getiremez" (pre-fetch).</li>
+<li><strong>Yığın Parçalanması (Heap Fragmentation)</strong>: Yönetilen nesneler GC'nin boşluk bulduğu her yere yerleştirilir. Zamanla yığın delikli peynire döner ve her nesne çağrısının bir Önbellek Iskalatması (Cache Miss) olması garanti altına alınır.</li>
+</ul>
+<hr />
+<h2 id="3-derinlemesine-inceleme-bellek-topografyas-sral-vs-dagnk">3. Derinlemesine İnceleme: Bellek Topografyası (Sıralı vs. Dağınık)<a class="headerlink" href="#3-derinlemesine-inceleme-bellek-topografyas-sral-vs-dagnk" title="Permanent link">&para;</a></h2>
+<h3 id="31-c-bellek-yaplar-dagnk-oop-gercekligi">3.1 C# Bellek Yapıları: Dağınık OOP Gerçekliği<a class="headerlink" href="#31-c-bellek-yaplar-dagnk-oop-gercekligi" title="Permanent link">&para;</a></h3>
+<p>C#'ta referans tipleri (<code>class</code>), bir işaretçi ağıyla birbirine bağlanmış şekilde Yönetilen Yığın (Managed Heap) üzerinde dinamik olarak bellek tahsis eder.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// C# OOP Yaklaşımı (Bellekte Dağınık)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">UnitOOP</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="p">;</span><span class="w">         </span><span class="c1">// 4 byte</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="p">;</span><span class="w">    </span><span class="c1">// İşaretçi (8 byte) -&gt; Yığın Adresi 2</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Transform</span><span class="w"> </span><span class="n">Data</span><span class="p">;</span><span class="w"> </span><span class="c1">// İşaretçi (8 byte) -&gt; Yığın Adresi 3</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">UnitOOP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">army</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">UnitOOP</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// İşaretçi Dizisi -&gt; Yığın Adresi 1</span>
+</code></pre></div>
+<p><strong>Şema: Standart C# Yönetilen Yığın (Managed Heap) Yerleşimi</strong></p>
+<pre class="mermaid"><code>graph TD
+    subgraph Managed_Heap_Daginik
+        List[Isaretci Dizisi Listesi] --&gt;|Isaretci 1| ObjA[UnitOOP A @0x1000]
+        List --&gt;|Isaretci 2| ObjB[UnitOOP B @0x8F20]
+        List --&gt;|Isaretci 3| ObjC[UnitOOP C @0x2A40]
+
+        ObjA --&gt;|Isaretci| TransA[Transform Verisi @0x1050]
+        ObjB --&gt;|Isaretci| TransB[Transform Verisi @0x9000]
+        ObjC --&gt;|Isaretci| TransC[Transform Verisi @0x3010]
+    end
+    style List fill:#f9d0c4
+    style ObjA fill:#ff9999
+    style ObjB fill:#ff9999
+    style ObjC fill:#ff9999
+</code></pre>
+<h3 id="32-nexus-cozumu-sral-bitisiklik">3.2 Nexus Çözümü: Sıralı Bitişiklik<a class="headerlink" href="#32-nexus-cozumu-sral-bitisiklik" title="Permanent link">&para;</a></h3>
+<p>Nexus, doğrusal yerel bellek arabelleklerinde depolanan tamamen yönetilmeyen (unmanaged), blittable yapılar (struct) kullanarak işaretçi ağını ortadan kaldırır.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Nexus Yaklaşımı (Bellekte Sıralı)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="na">[StructLayout(LayoutKind.Sequential)]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">public</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">UnitData</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="p">;</span><span class="w">         </span><span class="c1">// 4 byte</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">Pos</span><span class="p">;</span><span class="w">    </span><span class="c1">// 12 byte</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">}</span><span class="w"> </span><span class="c1">// Toplam: Tam olarak 16 byte. Blittable.</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">ChunkedBuffer</span><span class="o">&lt;</span><span class="n">UnitData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">armyData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChunkedBuffer</span><span class="o">&lt;</span><span class="n">UnitData</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1">// 1 Adet Bitişik Yerel Bellek Bloğu</span>
+</code></pre></div>
+<p><strong>Şema: Nexus Unmanaged Doğrusal Yerleşimi</strong></p>
+<pre class="mermaid"><code>graph LR
+    subgraph Unmanaged_Yerel_Bellek_Nexus
+        direction LR
+        Block1[UnitData A &lt;br/&gt; 16 Byte] --- Block2[UnitData B &lt;br/&gt; 16 Byte] --- Block3[UnitData C &lt;br/&gt; 16 Byte] --- Block4[UnitData D &lt;br/&gt; 16 Byte]
+    end
+    subgraph CPU_Onbellek_Satiri_64_Byte
+        direction LR
+        Cache[A, B, C ve D'yi tam olarak 1 CPU Döngüsünde getirir]
+    end
+    Block1 -.-&gt; Cache
+    Block4 -.-&gt; Cache
+    style Block1 fill:#c4f9d0
+    style Block2 fill:#c4f9d0
+    style Block3 fill:#c4f9d0
+    style Block4 fill:#c4f9d0
+    style Cache fill:#99ff99
+</code></pre>
+<p><strong>Komut Verimliliği Matematiği:</strong>
+64-byte'lık bir Önbellek Satırı (Cache Line) ve 16-byte'lık bir bileşen için:
+$<span class="arithmatex">\(\frac{64 \ byte}{16 \ byte} = 4 \ Varlik/Satir\)</span>$</p>
+<p>Nexus tek seferde 4 varlık getirir. OOP 1 varlık (artı 48 byte çöp veri) getirir, bant genişliğinin 'ini boşa harcar ve  daha fazla bellek seyahatine zorlar.</p>
+<h3 id="33-ongorucu-bellek-modellemesi-darbogazlar-tahmin-etme">3.3 Öngörücü Bellek Modellemesi: Darboğazları Tahmin Etme<a class="headerlink" href="#33-ongorucu-bellek-modellemesi-darbogazlar-tahmin-etme" title="Permanent link">&para;</a></h3>
+<p>Bitişik dizilerde bile, gizli donanım kusurları önceden tahmin edilmezse performansı yok edebilir. Nexus Engine, iki büyük donanım darboğazına karşı açıkça tasarlanmıştır: <strong>Önbellek Parçalanması (Cache Straddling)</strong> ve <strong>Sahte Paylaşım (False Sharing)</strong>.</p>
+<p><strong>Öngörücü Şema 1: Önbellek Parçalanması (Hizalanmamış Veri Cezası)</strong>
+Bir struct önbellek satırı (cache line) sınırlarına hizalanmadığında, tek bir varlığı okumak L2/L3'ten <em>iki</em> ayrı önbellek satırının getirilmesini gerektirir ve performansı anında yarıya indirir. Nexus, katı 64-byte dolgulu (padded) tahsisler aracılığıyla bunu öngörür ve önler.</p>
+<pre class="mermaid"><code>graph TD
+    subgraph Kotu_Hizalama_Cache_Straddling
+        Line1[Önbellek Satırı 1: 64 Byte] --- StructA[Varlık 1: 40 Byte]
+        Line1 --- Split[Varlık 2 Bölüm 1: 24 Byte]
+        Line2[Önbellek Satırı 2: 64 Byte] --- Split2[Varlık 2 Bölüm 2: 16 Byte]
+        Line2 --- StructC[Varlık 3: 40 Byte]
+        Split -.-&gt; |1 Varlık için 2 okuma gerektirir!| Alert((DURAKLAMA))
+    end
+    style Alert fill:#ff4444,color:#fff
+</code></pre>
+<p><strong>Öngörücü Şema 2: Sahte Paylaşım (Çoklu İş Parçacığı Çarpışması)</strong>
+Eğer Çekirdek A <code>Varlık 1</code>'e yazar ve Çekirdek B <code>Varlık 2</code>'ye yazarsa, ancak her iki varlık da <em>aynı 64-byte'lık Önbellek Satırında</em> oturuyorsa, CPU yapay bir kilit (lock) dayatarak ciddi iş parçacığı duraklamalarına neden olur. Nexus, farklı işçi iş parçacıkları (worker threads) için verileri birbirinden uzağa parçalayarak (chunking) bunu önler.</p>
+<pre class="mermaid"><code>graph LR
+    Core1((CPU Çekirdeği 1)) --&gt;|Yazar| E1[Varlık 1]
+    Core2((CPU Çekirdeği 2)) --&gt;|Yazar| E2[Varlık 2]
+
+    subgraph Ayni_Onbellek_Satiri_64B
+        E1 --- E2
+    end
+
+    Core1 -.-&gt; |Donanımsal Kilit Tetiklendi!| Core2
+    style Ayni_Onbellek_Satiri_64B fill:#ffcccc
+</code></pre>
+<hr />
+<h2 id="4-nexus-motoru-srallg-nasl-saglar">4. Nexus Motoru: Sıralılığı Nasıl Sağlar?<a class="headerlink" href="#4-nexus-motoru-srallg-nasl-saglar" title="Permanent link">&para;</a></h2>
+<h3 id="41-sparseset-idden-dogrusallga-kopru">4.1 SparseSet: ID'den Doğrusallığa Köprü<a class="headerlink" href="#41-sparseset-idden-dogrusallga-kopru" title="Permanent link">&para;</a></h3>
+<p>Nexus, rastgele erişimi (ID ile) dizi performansıyla birleştirmek için <strong>SparseSets</strong> kullanır.</p>
+<ul>
+<li><strong>Sparse Array (Seyrek Dizi)</strong>: Varlık ID'sine göre indekslenir. Dense Array'deki indeksi saklar.</li>
+<li><strong>Dense Array (Yoğun Dizi)</strong>: Gerçek ham verinin tutulduğu yerdir. CPU sadece bu dizi üzerinde işlem yapar.</li>
+</ul>
+<h3 id="42-swap-and-pop-100-doluluk-muhafz">4.2 Swap-and-Pop: %100 Doluluk Muhafızı<a class="headerlink" href="#42-swap-and-pop-100-doluluk-muhafz" title="Permanent link">&para;</a></h3>
+<p>C#'ta bir varlık silindiğinde, diziler genellikle <code>null</code> bir boşluk bırakarak döngü sırasında önbellek ıskalamasına (cache miss) neden olur. Nexus <strong>Swap-and-Pop</strong> kullanır.</p>
+<p><strong>Şema: Swap-and-Pop Mekanizması</strong></p>
+<pre class="mermaid"><code>stateDiagram-v2
+    direction LR
+    state "Silme Öncesi (Dense Array)" as S1 {
+        [A] --&gt; [B] --&gt; [C] --&gt; [D]
+    }
+    state "'B' Varlığı Siliniyor" as S2 {
+        [A] --&gt; [Bosluk] --&gt; [C] --&gt; [D]
+    }
+    state "Swap-and-Pop İşlemi" as S3 {
+        [A] --&gt; [D_Buraya_Tasinir] --&gt; [C] --&gt; [Kaldirildi]
+    }
+    state "Silme Sonrası" as S4 {
+        [A] --&gt; [D] --&gt; [C]
+    }
+    S1 --&gt; S2
+    S2 --&gt; S3
+    S3 --&gt; S4
+</code></pre>
+<p><strong>Matematiksel Yoğunluk İspatı:</strong>
+$<span class="arithmatex">\(Yogunluk_{Tampon} = \frac{N}{Kapasite} = \%100\)</span>$</p>
+<hr />
+<h2 id="5-alternatif-sektor-cozumleri-unity-dots-ecs-vs-nexus-prime">5. Alternatif Sektör Çözümleri: Unity DOTS / ECS vs. Nexus Prime<a class="headerlink" href="#5-alternatif-sektor-cozumleri-unity-dots-ecs-vs-nexus-prime" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime'ı bağlamsallaştırmak için, onu ana akım ECS çerçeveleriyle, özellikle <strong>Unity DOTS (Entities)</strong> ile karşılaştırmalıyız. Her ikisi de OOP bellek parçalanması sorununu çözse de, temelde farklı iç mimariler kullanırlar.</p>
+<h3 id="51-unity-dots-arketip-archetype-mimarisi">5.1 Unity DOTS: Arketip (Archetype) Mimarisi<a class="headerlink" href="#51-unity-dots-arketip-archetype-mimarisi" title="Permanent link">&para;</a></h3>
+<p>Unity <strong>Arketipler</strong> kullanır. Tam olarak aynı bileşen kombinasyonuna sahip varlıklar aynı fiziksel 16KB bellek "Chunk"ı (yığın) içinde gruplanır.</p>
+<ul>
+<li><strong>Kusur (Yapısal Değişiklikler - Structural Changes):</strong> Eğer tek bir "Birim"e (Unit) "Zehirlendi" (Poisoned) bileşeni eklerseniz, Unity o birimin tüm verilerini "Birim" chunk'ından kopyalayıp yeni bir "Birim + Zehirlendi" chunk'ına taşımak zorundadır. Bu işlem çoklu iş parçacığını (multithreading) duraklatır ve devasa bellek kopyalamalarını tetikler.</li>
+</ul>
+<h3 id="52-nexus-prime-sparseset-mimarisi">5.2 Nexus Prime: SparseSet Mimarisi<a class="headerlink" href="#52-nexus-prime-sparseset-mimarisi" title="Permanent link">&para;</a></h3>
+<p>Nexus bileşenleri bireysel dizilere (array) izole eder. Bir "Birim" sadece bir ID'dir. <code>Pozisyon</code>'u Pozisyon dizisinde, <code>Sağlık</code>'ı Sağlık dizisinde yaşar.</p>
+<ul>
+<li><strong>Avantaj (Sürtünmesiz Kompozisyon):</strong> Bir Birime "Zehirlendi" bileşeni eklemek, sadece <code>Zehirlendi</code> dizisinin sonuna veri yazmayı içerir. Varlığın Pozisyon ve Sağlık verileri <em>asla yer değiştirmez</em>. Yapısal değişiklik yoktur, işlem hattı (pipeline) duraklaması yoktur.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Özellik</th>
+<th>Unity DOTS (Arketip)</th>
+<th>Nexus Prime (SparseSet)</th>
+<th>Farkın Etkisi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bileşen Yerleşimi</strong></td>
+<td>Chunk'larda Varlık tipine göre gruplu</td>
+<td>Bileşen tipine göre izole edilmiş diziler</td>
+<td>Nexus tekil bileşenleri daha hızlı döner (araya girme/interlacing yoktur).</td>
+</tr>
+<tr>
+<td><strong>Bileşen Ekleme/Çıkarma</strong></td>
+<td><strong>Çok Yavaş</strong> (Yapısal değişiklik, veri kopyalama)</td>
+<td><strong>Anında</strong> (Diziye ekleme, taşıma yok)</td>
+<td>Nexus, hızlı durum değişiklikleri olan son derece dinamik oyunlarda öne çıkar.</td>
+</tr>
+<tr>
+<td><strong>Çoklu İş Parçacıklı Sorgular</strong></td>
+<td>Yüksek karmaşıklık (Senkronizasyon noktaları gerekir)</td>
+<td>Kilitlenmesiz (lock-free) bileşen dizileri</td>
+<td>Nexus durum değişiklikleri sırasında CPU hat baloncuklarını minimize eder.</td>
+</tr>
+<tr>
+<td><strong>Sorgu İterasyonu</strong></td>
+<td>Çoklu bileşenlerde mükemmel önbellek yerelliği</td>
+<td>Çapraz bileşen ID araması için hafif ceza</td>
+<td>Unity aynı anda 5+ bileşen okunurken daha hızlıdır; Nexus izole sistemler için daha hızlıdır.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-sfr-gc-yonetimi-teknik-ispat">6. Sıfır-GC Yönetimi: Teknik İspat<a class="headerlink" href="#6-sfr-gc-yonetimi-teknik-ispat" title="Permanent link">&para;</a></h2>
+<p>Nexus, veriyi <code>NativeMemory.Alloc</code> ile tahsis ederek Sıfır-GC elde eder.</p>
+<ul>
+<li><strong>Mekanizma</strong>: <code>Blittable</code> struct yapıları kullanılarak, GC'nin referans tarayıcısının (root scanner) bu bellek bloklarında gezinme maliyeti ortadan kaldırılır.</li>
+<li><strong>Sonuç</strong>: 10GB'lık bir simülasyon verisi, tam olarak 10KB ile aynı GC baskısına sahiptir.</li>
+</ul>
+<hr />
+<h2 id="7-mantksal-orkestrasyon-dag-simd-ve-paging">7. Mantıksal Orkestrasyon: DAG, SIMD ve Paging<a class="headerlink" href="#7-mantksal-orkestrasyon-dag-simd-ve-paging" title="Permanent link">&para;</a></h2>
+<h3 id="71-dag-yonlu-dongusuz-cizge-planlama">7.1 DAG (Yönlü Döngüsüz Çizge) Planlama<a class="headerlink" href="#71-dag-yonlu-dongusuz-cizge-planlama" title="Permanent link">&para;</a></h3>
+<p>Nexus, sistem bağımlılıklarını çözmek için <strong>Kahn Algoritması</strong> kullanır.</p>
+<ul>
+<li><strong>Teorem</strong>: Eğer <span class="arithmatex">\(S_1 \cap S_2 = \emptyset\)</span> ise, o zaman <span class="arithmatex">\(S_1\)</span> ve <span class="arithmatex">\(S_2\)</span> paralel olarak çalıştırılabilir.</li>
+<li><strong>Sonuç</strong>: Mevcut tüm CPU çekirdekleri üzerinde otomatik, kilitlenmesiz (lock-free) paralelleştirme.</li>
+</ul>
+<h3 id="72-simd-avx2-vektorizasyon">7.2 SIMD (AVX2) Vektörizasyon<a class="headerlink" href="#72-simd-avx2-vektorizasyon" title="Permanent link">&para;</a></h3>
+<p>Milyonlarca varlığı <code>if</code> koşulu ile filtrelemek dallanma tahmini (branch prediction) için bir felakettir.</p>
+<ul>
+<li><strong>Nexus Yaklaşımı</strong>: 256-bit registerlar üzerinde bit düzeyinde (bitwise) işlemler kullanır. 1 komutta 32 filtreyi işler.</li>
+<li><strong>Formül</strong>: <span class="arithmatex">\(S = B(C_1) \ \&amp; \ B(C_2) \dots \ \&amp; \ B(C_n)\)</span></li>
+</ul>
+<h3 id="73-16kb-sayfalama-64-byte-hizalama">7.3 16KB Sayfalama &amp; 64-Byte Hizalama<a class="headerlink" href="#73-16kb-sayfalama-64-byte-hizalama" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>16KB Sayfalama (Paging)</strong>: 4 tipik OS bellek sayfasına eşittir, TLB önbellek isabetlerini maksimize eder.</li>
+<li><strong>64-Byte Hizalama</strong>: Her bileşenin bir CPU Önbellek Satırına mükemmel bir şekilde sığmasını sağlar. Bir önbellek satırı sınırını geçmek erişim maliyetini ikiye katlar.</li>
+</ul>
+<h2 id="8-mimari-soyutlama-dod-koprusu">8. Mimari Soyutlama: DOD Köprüsü<a class="headerlink" href="#8-mimari-soyutlama-dod-koprusu" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime, donanım duyarlı programlamanın brutal karmaşıklığını temiz, niyet odaklı bir API ile soyutlar. Düşük seviyeli C++ performansını, C#'ın güvenliği ve ergonomisi ile birleştirir.</p>
+<h3 id="81-karslastrma-standart-oop-vs-nexus-prime">8.1 Karşılaştırma: Standart OOP vs. Nexus Prime<a class="headerlink" href="#81-karslastrma-standart-oop-vs-nexus-prime" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Özellik</th>
+<th style="text-align: left;">Standart OOP (C#)</th>
+<th style="text-align: left;">Nexus Prime (DOD)</th>
+<th style="text-align: left;">Teknik Avantaj</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Kimlik</strong></td>
+<td style="text-align: left;">Nesne Referansı (8 byte işaretçi)</td>
+<td style="text-align: left;"><code>EntityId</code> (8 byte tamsayı)</td>
+<td style="text-align: left;">Dolaylı erişim sıfırlanır; veri yer değiştirse bile ID sabit kalır.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mantık</strong></td>
+<td style="text-align: left;">Nesne içine gömülü (Update())</td>
+<td style="text-align: left;">Sistemlerde ayrıştırılmış (Execute())</td>
+<td style="text-align: left;">Instruction cache verimliliği; sistemler sadece gerekli veriye dokunur.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Depolama</strong></td>
+<td style="text-align: left;">Managed Heap üzerinde dağınık</td>
+<td style="text-align: left;">Bitişik Native Tamponlarda paketli</td>
+<td style="text-align: left;">%100 Cache Line kullanımı; prefetcher bir sonraki veriyi öngörebilir.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Yaşam Döngüsü</strong></td>
+<td style="text-align: left;">GC Yönetimli (Belirsiz zamanlı)</td>
+<td style="text-align: left;">Manuel/Havuz Yönetimli (Deterministik)</td>
+<td style="text-align: left;">Takılmaları (stutter) yok eder; GC üzerinde sıfır yük.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-kod-arketipleri-uygulama-desenleri">8.2 Kod Arketipleri: Uygulama Desenleri<a class="headerlink" href="#82-kod-arketipleri-uygulama-desenleri" title="Permanent link">&para;</a></h3>
+<p>Standart OOP döngüleri "Referans Krizi" nedeniyle öngörülemezdir. Nexus, CPU'yu doğrusal, yüksek hızlı bir yürütme akışına zorlar.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// OOP Felaketi (Yüksek Gecikme)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">army</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">// Erişim başına 3 ayrı Cache Miss riski (birim -&gt; transform -&gt; pos)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">unit</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">// Nexus Avantajı (Zirve Bant Genişliği)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">NexusHelper</span><span class="p">.</span><span class="n">ForEach</span><span class="p">((</span><span class="k">ref</span><span class="w"> </span><span class="n">Position</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="c1">// %100 Cache Hit. Veri, RAM&#39;den L1&#39;e kesintisiz olarak akar.</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">});</span>
+</code></pre></div>
+<hr />
+<h2 id="9-performans-gercekleri-karslastrmal-testler-benchmarks">9. Performans Gerçekleri: Karşılaştırmalı Testler (Benchmarks)<a class="headerlink" href="#9-performans-gercekleri-karslastrmal-testler-benchmarks" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/gkhanC/Nexus/blob/master/Documents/Manuals/Benchmarks_eng.md">Benchmark Raporu</a>'ndan alınan doğrulanmış sonuçlar:</p>
+<table>
+<thead>
+<tr>
+<th>Kategori</th>
+<th>Standart Managed C# (Unity)</th>
+<th>Nexus Prime</th>
+<th>Hız Artışı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Varlık Döngüsü (100k)</strong></td>
+<td>840.0 ms</td>
+<td>8.0 ms</td>
+<td><strong>105.0x</strong></td>
+</tr>
+<tr>
+<td><strong>Update İterasyonu</strong></td>
+<td>12.4 ms</td>
+<td>0.2 ms</td>
+<td><strong>62.0x</strong></td>
+</tr>
+<tr>
+<td><strong>Matematik (10M İşlem)</strong></td>
+<td>480.0 ms</td>
+<td>42.0 ms</td>
+<td><strong>11.4x</strong></td>
+</tr>
+<tr>
+<td><strong>Bellek Tahsisi</strong></td>
+<td>450 KB / Kare</td>
+<td><strong>0 KB / Kare</strong></td>
+<td><strong>INF (Sıfır-GC)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-stratejik-degerlendirme-artlar-eksiler-ve-riskler">10. Stratejik Değerlendirme: Artılar, Eksiler ve Riskler<a class="headerlink" href="#10-stratejik-degerlendirme-artlar-eksiler-ve-riskler" title="Permanent link">&para;</a></h2>
+<h3 id="101-avantajlar-ve-guclu-yonler">10.1 Avantajlar ve Güçlü Yönler<a class="headerlink" href="#101-avantajlar-ve-guclu-yonler" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Sınırsız Ölçek</strong>: OOP'de fiziksel olarak imkansız olan simülasyonlar sıradan hale gelir.</li>
+<li><strong>Öngörülebilir Kararlılık</strong>: Sıfır GC sıçraması, sıfır "açıklanamayan takılma" (stuttering) anlamına gelir.</li>
+<li><strong>Doğrudan Donanım Kontrolü</strong>: Yüksek hassasiyetli AVX/SSE kullanımı.</li>
+</ul>
+<h3 id="102-riskler-ve-zayf-yonler-cons">10.2 Riskler ve Zayıf Yönler (Cons)<a class="headerlink" href="#102-riskler-ve-zayf-yonler-cons" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Manuel Temizlik</strong>: <code>Dispose()</code> metodunu çağırmayı unutmak unmanaged bellek sızıntılarına (memory leak) yol açar.</li>
+<li><strong>Dolaylı Erişim Vergisi</strong>: Rastgele <code>Get</code> çağrıları için kullanılan SparseSet araması, doğrudan dizi erişiminden daha yavaştır (3.4x daha yavaş).</li>
+<li><strong>Küçük Ölçekte Sürtünme</strong>:  varlık için kurulum yükü, yürütme kazanımlarından daha ağır basar.</li>
+</ul>
+<hr />
+<h2 id="11-sonuc-felsefi-ufuk">11. Sonuç: Felsefi Ufuk<a class="headerlink" href="#11-sonuc-felsefi-ufuk" title="Permanent link">&para;</a></h2>
+<p>Nexus Prime donanıma duyulan bir saygı taahhüdüdür. Kodlama alışkanlıklarınızı "Nesne yaratmaktan" "Veriyi orkestre etmeye" dönüştürür. Yazılım mantığını CPU'nun fiziksel yasalarıyla uyumlu hale getirerek, performansı "en iyi çaba" sonucundan çıkarıp deterministik bir matematiksel kesinliğe dönüştürür.</p>
+<hr />
+<h2 id="12-bellek-yonetimi-ve-performans-stratejisi">12. Bellek Yönetimi ve Performans Stratejisi<a class="headerlink" href="#12-bellek-yonetimi-ve-performans-stratejisi" title="Permanent link">&para;</a></h2>
+<p>Sıfır-GC bir mimaride bellek güvenliği, çalışma zamanından (runtime) mimara kaydırılır. Açık (explicit) temizleme, ekstrem performansın fiziksel bedelidir.</p>
+<h3 id="121-aktor-guvenlik-kalb">12.1 "Aktör" Güvenlik Kalıbı<a class="headerlink" href="#121-aktor-guvenlik-kalb" title="Permanent link">&para;</a></h3>
+<p>OOP ve DOD dünyaları köprülenirken, unmanaged veriler managed yaşam döngülerine bağlanmalıdır.
+* <strong>Registry Temizliği</strong>: <code>Registry.Dispose()</code> çağrısı, tüm varlıkları ve bileşenleri güvenli bir şekilde deallocate eder.
+* <strong>Hibrit Temizlik</strong>: Unmanaged kimlik barındıran yönetilen nesneler (MonoBehaviour), nesne yok edildiğinde Swap-and-Pop yoğunluğunun bozulmaması için <code>IDisposable</code> uygulamalıdır.</p>
+<h3 id="122-mimari-zayflklar-giderme">12.2 Mimari Zayıflıkları Giderme<a class="headerlink" href="#122-mimari-zayflklar-giderme" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Erişim Vergisini Aşmak</strong>: <code>SparseSet.Get</code> <span class="arithmatex">\(O(1)\)</span> olsa da, sıralı olmayan erişim modeli donanımsal bir darboğazdır. Yüksek bant genişlikli sistemler Registry'nin rastgele erişimini atlamalı ve doğrudan paketlenmiş <strong>Yoğun Dizi (Dense Array)</strong> üzerinde çalışmalıdır.</li>
+<li><strong>Ölçek Sürtünmesi</strong>: Nexus, gecikme (latency) yerine verimlilik (throughput) için optimize edilmiştir. <span class="arithmatex">\(&lt; 100\)</span> varlık içeren senaryolarda, yönetim yükü (Job planlama, Senkronizasyon) yürütme kazancını aşar. Küçük ölçekli UI mantığı için hibrit tamponlar önerilir.</li>
+</ul>
+<h3 id="123-dispose-kalb-ve-hibrit-snflar">12.3 Dispose Kalıbı ve Hibrit Sınıflar<a class="headerlink" href="#123-dispose-kalb-ve-hibrit-snflar" title="Permanent link">&para;</a></h3>
+<p>Unity gibi hibrit ortamlarda <code>IDisposable</code> güvenliğinizdir.
+* <strong>Registry Sahipliği</strong>: <code>Registry</code>, üst düzey unmanaged tamponların sahibidir. Dispose edilmesi tüm varlık/bileşen belleğini güvenli bir şekilde yok eder.
+* <strong>Aktör Kalıbı</strong>: Unmanaged veri barındıran yönetilen sınıflar MUTLAKA <code>Dispose</code> uygulamalıdır.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_entity</span><span class="p">.</span><span class="n">IsNull</span><span class="p">)</span><span class="w"> </span><span class="n">_registry</span><span class="p">.</span><span class="n">Destroy</span><span class="p">(</span><span class="n">_entity</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">_unmanagedListe</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span><span class="w"> </span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="n">GC</span><span class="p">.</span><span class="n">SuppressFinalize</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="124-dolayl-erisim-vergisini-ortadan-kaldrma">12.4 Dolaylı Erişim Vergisini Ortadan Kaldırma<a class="headerlink" href="#124-dolayl-erisim-vergisini-ortadan-kaldrma" title="Permanent link">&para;</a></h3>
+<p><code>Registry.Get&lt;T&gt;</code> <span class="arithmatex">\(O(1)\)</span> olsa da, dağınık aramalar doğrusal iterasyona göre gecikme cezası getirir.
+* <strong>Strateji</strong>: Her zaman <strong>Sıralı Sistem Erişimi</strong>'ne öncelik verin. Bir <code>INexusSystem</code> içinde CPU prefetcher, bileşen dizilerini siz daha istemeden L1 önbelleğine getirir.
+* <strong>Kural</strong>: <code>Get</code> metodunu reaktif mantık için; <code>Sistemleri</code> ise yüksek frekanslı simülasyon mantığı için kullanın.</p>
+<h3 id="125-stratejik-olceklendirme-yuk-treni-analojisi">12.5 Stratejik Ölçeklendirme (Yük Treni Analojisi)<a class="headerlink" href="#125-stratejik-olceklendirme-yuk-treni-analojisi" title="Permanent link">&para;</a></h3>
+<p>Nexus yüksek bant genişlikli bir motordur.
+* <strong>Küçük Ölçek (&lt; 100 Varlık)</strong>: Düşük yönetim yükü nedeniyle standart OOP genellikle daha hızlıdır.
+* <strong>Büyük Ölçek (&gt; 1000 Varlık)</strong>: Nexus vazgeçilmez hale gelir. Manuel yönetim maliyeti, GC sıçramalarının ve önbellek ıskalamalarının (cache miss) ortadan kalkmasıyla fazlasıyla telafi edilir.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
