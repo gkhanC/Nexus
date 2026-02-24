@@ -48,4 +48,4 @@ Integrity Dashboard'daki "Degraded" uyarısı, genellikle unmanaged bir bellek s
 ---
 
 ## Orijinal Kod
-[NexusIntegrityDashboard.cs Kaynak Kodu](file:///home/gokhanc/Development/Nexus/Nexus.Editor/EditorCockpit/NexusIntegrityDashboard.cs)
+[NexusIntegrityDashboard.cs Kaynak Kodu](https://github.com/gkhanC/Nexus/blob/master/Nexus.Editor/EditorCockpit/NexusIntegrityDashboard.cs)

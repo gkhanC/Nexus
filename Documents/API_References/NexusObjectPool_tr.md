@@ -50,4 +50,4 @@ Kritik sahnelerin başında (loading ekranında), sık kullanılan nesneleri ön
 ---
 
 ## Orijinal Kod
-[NexusDevelopmentTools.cs Kaynak Kodu](file:///home/gokhanc/Development/Nexus/Nexus.Unity/Core/NexusDevelopmentTools.cs)
+[NexusDevelopmentTools.cs Kaynak Kodu](https://github.com/gkhanC/Nexus/blob/master/Nexus.Unity/Core/NexusDevelopmentTools.cs)

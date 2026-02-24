@@ -102,7 +102,7 @@ We don't just test "ideal" conditions. Our tests cover iterative throughput, mem
 
 ### Suite Source Code
 ```csharp
-[render_diffs(file:///home/gokhanc/Development/Nexus/Nexus.Unity/Core/NexusBenchmarkSuite.cs)]
+[render_diffs(https://github.com/gkhanC/Nexus/blob/master/Nexus.Unity/Core/NexusBenchmarkSuite.cs)]
 ```
 
 ---

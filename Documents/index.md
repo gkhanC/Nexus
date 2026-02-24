@@ -3,7 +3,33 @@
 ---
 
 ## Abstract / Executive Summary
-This manifesto details the technical foundations of **Nexus Prime**, an elite Entity Component System (ECS) framework designed to solve the systemic performance bottlenecks of modern high-level managed environments. We analyze the **Memory Wall**, the failure of the **Object-Oriented Paradigm (OOP)** at scale, and the architectural crisis of modern managed runtimes. Nexus Prime offers a "Zero-Friction" unmanaged architecture that operates at the theoretical limits of modern CPU architectures while providing a seamless, type-safe bridge to managed environments like Unity. This document serves as a comprehensive technical guide, problem-solution analysis, and philosophical roadmap for high-scale simulation development.
+This manifesto details the technical foundations of **Nexus Prime**, an elite Entity Component System (ECS) framework designed to solve the systemic performance bottlenecks of modern high-level managed environments. We analyze the **Memory Wall**, the failure of the **Object-Oriented Paradigm (OOP)** at scale, and the architectural crisis of modern managed runtimes. 
+
+Nexus Prime offers a "Zero-Friction" unmanaged architecture that operates at the theoretical limits of modern CPU architectures while providing a seamless, type-safe bridge to managed environments like Unity.
+
+### The Value Proposition: Why Nexus Prime?
+
+| Advantage | Standard OOP (C#) | Nexus Prime (ECS) | Impact |
+| :--- | :--- | :--- | :--- |
+| **Memory Topology** | Fragmented Managed Heap | Contiguous Native Buffers | 100% Cache Hit Rate vs. Constant Misses |
+| **Stability** | Periodic GC Spikes (Stutter) | Zero-GC Allocation | Deterministic Frame Times (No Frame Drops) |
+| **Execution Flow** | Random Pointer Chasing | Linear Instruction Stream | Maximized Pipelining & Branch Prediction |
+| **Parallelism** | Manual Thread Management | Native JobSystem Dispatch | Automatic Work Stealing & SIMD Vectorization |
+
+### The Nexus Suite: Beyond the Core
+
+Nexus Prime is more than a storage layer; it is a full-featured high-performance development ecosystem:
+
+*   **Snapshot Engine**: High-fidelity state serialization allowing for instant save/load and deterministic "Time-Travel" debugging.
+*   **Nexus Query (O(1))**: A reactive query engine that resolves complex multi-component requirements with zero search overhead.
+*   **Integrity Sentinel**: An automated dashboard that fixes file system inconsistencies, detects memory leaks, and ensures unmanaged data integrity.
+*   **Unity Power-Suite**:
+    *   **Nexus Logger**: A multi-sink logging system that pipes data to consoles, files, and live UI with negligible overhead.
+    *   **Rich Attributes**: `[ReadOnly]`, `[Required]`, and `[MustBeUnmanaged]` tags to enforce architectural safety at compile time.
+    *   **Core Extensions**: Powerful extension suites for `String`, `Math`, and `Hierarchy` manipulation tailored for DOD throughput.
+    *   **Advanced Types**: Specialized types like `NexusOptional` and `BitPacked` for memory-efficient data representation.
+
+This document serves as a comprehensive technical guide, problem-solution analysis, and philosophical roadmap for high-scale simulation development.
 
 ---
 
@@ -50,6 +76,7 @@ graph LR
 ```
 
 **Stall Mathematics:**
+$$Stall \% = MissRate \times Latency_{RAM}$$
 
 
 ### 2.2 The Reference Crisis: Fragmentation & Pointer Chasing
@@ -140,6 +167,7 @@ graph LR
 
 **Instruction Efficiency Math:**
 For a 64-byte Cache Line and a 16-byte component:
+$$\frac{64 \ bytes}{16 \ bytes} = 4 \ Entities/Line$$
 
 
 
@@ -221,6 +249,7 @@ stateDiagram-v2
 ```
 
 **Mathematical Proof of Density:**
+$$Density_{Buffer} = \frac{N}{Capacity} = 100\%$$
 
 
 ---
@@ -265,7 +294,7 @@ Nexus achieves Zero-GC by using `NativeMemory.Alloc`.
 
 Nexus uses **Kahn's Algorithm** to solve dependencies.
 
-* **Theorem**: If , then  and  can execute in parallel.
+* **Theorem**: If $S_1 \cap S_2 = \emptyset$, then $S_1$ and $S_2$ can execute in parallel.
 * **Result**: Automatic, lock-free parallelization across all available CPU cores.
 
 ### 7.2 SIMD (AVX2) Vectorization
@@ -273,18 +302,49 @@ Nexus uses **Kahn's Algorithm** to solve dependencies.
 Filtering through millions of entities with `if` is a branch-prediction disaster.
 
 * **Nexus Approach**: Uses bitwise operations on 256-bit registers. Process 32 filters in 1 instruction.
-* **Formula**: 
+* **Formula**: $S = B(C_1) \ \& \ B(C_2) \dots \ \& \ B(C_n)$
 
 ### 7.3 16KB Paging & 64-Byte Alignment
 
 * **16KB Paging**: Matches 4 typical OS memory pages, maximizing TLB cache hits.
 * **64-Byte Alignment**: Ensures every component fits perfectly into a CPU Cache Line. Crossing a cache line boundary doubles access cost.
 
+## 8. Architectural Abstraction: The DOD Bridge
+
+Nexus Prime abstracts the brutal complexity of hardware-aware programming into a clean, intent-based API. It provides the performance of low-level C++ with the safety and ergonomics of C#.
+
+### 8.1 Comparison: Standard OOP vs. Nexus Prime
+
+| Aspect | Standard OOP (C#) | Nexus Prime (DOD) | Technical Benefit |
+| :--- | :--- | :--- | :--- |
+| **Identity** | Object Reference (8 bytes pointer) | `EntityId` (8 bytes integer) | Zero indirect lookups; ID remains stable even if data moves. |
+| **Logic** | Encapsulated in objects (Update()) | Decoupled in Systems (Execute()) | Better instruction cache reuse; systems only touch required data. |
+| **Storage** | Scattered on Managed Heap | Packed in Contiguous Native Buffers | 100% Cache Line utilization; prefetcher can predict next data. |
+| **Lifecycle** | GC Managed (Non-deterministic) | Manual/Pool Managed (Deterministic) | Eliminates stutters; Zero GC throughput impact. |
+
+### 8.2 Code Archetypes: Implementation Patterns
+
+Standard OOP loops are unpredictable due to the "Reference Crisis." Nexus forces the CPU into a linear, high-speed execution flow.
+
+```csharp
+// The OOP Disaster (High Latency)
+foreach (var unit in army) {
+    // 3 separate Cache Misses per access (unit -> transform -> position)
+    unit.Position += unit.Velocity * dt; 
+}
+
+// The Nexus Advantage (Peak Throughput)
+NexusHelper.ForEach((ref Position p, ref Velocity v) => {
+    // 100% Cache Hit. Data is streamed continuously from RAM to L1.
+    p.Value += v.Value * dt;
+});
+```
+
 ---
 
-## 8. Performance Realities: Benchmarks
+## 9. Performance Realities: Benchmarks
 
-Verified results from the [Benchmark Whitepaper](https://www.google.com/search?q=file:///home/gokhanc/Development/Nexus/Documents/Manuals/Benchmarks_eng.md):
+Verified results from the [Benchmark Whitepaper](https://github.com/gkhanC/Nexus/blob/master/Documents/Manuals/Benchmarks_eng.md):
 
 | Metric | Managed C# (Unity) | Nexus Prime | Speedup |
 | --- | --- | --- | --- |
@@ -295,25 +355,63 @@ Verified results from the [Benchmark Whitepaper](https://www.google.com/search?q
 
 ---
 
-## 9. Strategic Evaluation: Pros, Cons, and Risks
+## 10. Strategic Evaluation: Pros, Cons, and Risks
 
-### 9.1 Advantages (Pros) & Strengths
+### 10.1 Advantages (Pros) & Strengths
 
 * **Unlimited Scale**: Sims that were physically impossible in OOP become trivial.
 * **Predictable Stability**: Zero GC spikes means zero "unexplained stuttering."
 * **Direct Hardware Control**: High-precision AVX/SSE usage.
 
-### 9.2 Risks and Weaknesses (Cons)
+### 10.2 Risks and Weaknesses (Cons)
 
-* **Manual Cleanup**: Forgetting to call `Dispose()` leads to unmanaged memory leaks.
+* **Manuel Cleanup**: Forgetting to call `Dispose()` leads to unmanaged memory leaks.
 * **Point-Lookup Tax**: SparseSet lookup used for random `Get` is slower than direct array access (3.4x slower).
 * **Small Scale Friction**: Setup overhead for  entities outweighs execution gains.
 
 ---
 
-## 10. Conclusion: The Philosophical Horizon
+## 11. Conclusion: The Philosophical Horizon
 
 Nexus Prime is a commitment to hardware respect. It changes your coding habits from "Creating objects" to "Orchestrating data." By aligning software logic with the physical laws of the CPU, it transforms performance from a "best-effort" outcome into a deterministic mathematical certainty.
+
+---
+
+## 12. Memory Management & Tactical Lifecycle
+In a Zero-GC architecture, memory safety is shifted from the runtime to the architect. Explicit disposal is the physical price of extreme performance.
+
+### 12.1 The "Actor" Safety Pattern
+When bridging OOP and DOD, unmanaged data must be tethered to managed lifecycles.
+* **Registry Disposal**: The `Registry.Dispose()` call safely deallocates all entities and components.
+* **Hybrid Disposal**: Managed objects (MonoBehaviours) owning unmanaged identity must implement `IDisposable` to ensure Swap-and-Pop density is maintained even when objects are destroyed.
+
+### 12.2 Architectural Weakness Mitigation
+* **Solving Point-Lookup Tax**: While `SparseSet.Get` is $O(1)$, its non-sequential access pattern is a hardware bottleneck. High-throughput systems must bypass the Registry's random access and operate directly on the packed **Dense Array**.
+* **Scale Friction**: Nexus is optimized for throughput over latency. For scenarios involving $< 100$ entities, the orchestration overhead (Job scheduling, Sync Points) exceeds execution gains. Recommend hybrid buffers for small-scale UI logic.
+
+### 12.3 The Dispose Pattern & Hybrid Classes
+In a hybrid environment like Unity, `IDisposable` is your safety net.
+* **Registry Ownership**: The `Registry` owns high-level unmanaged buffers. Disposing it kills all entity/component memory safely.
+* **Actor Pattern**: Managed classes owning unmanaged data MUST implement `Dispose`.
+```csharp
+public void Dispose() {
+    if (!_entity.IsNull) _registry.Destroy(_entity);
+    _unmanagedList.Dispose(); 
+    GC.SuppressFinalize(this);
+}
+```
+
+### 12.4 Eliminating the Point-Lookup Tax
+While `Registry.Get<T>` is $O(1)$, scattered lookups incur a latency penalty compared to linear iteration.
+* **Strategy**: Always prioritize **Sequential System Access**. In an `INexusSystem`, the CPU prefetcher fetches component arrays into L1 cache before you even request them.
+* **Rule**: Use `Get` for reactive-only logic; use `Systems` for high-frequency simulation logic.
+
+### 12.5 Strategic Scale (The Freight Train Analogy)
+Nexus is a high-bandwidth engine. 
+* **Small Scale (< 100 Entities)**: Standard OOP is often faster due to lower management overhead.
+* **Large Scale (> 1000 Entities)**: Nexus becomes essential. The cost of manual management is negated by the elimination of GC spikes and cache misses.
+
+---
 
 ---
 
@@ -324,7 +422,33 @@ Nexus Prime is a commitment to hardware respect. It changes your coding habits f
 
 ## Özet / Yönetici Özeti
 
-Bu manifesto, Nexus Prime'ın teknik temellerini ve modern donanım üzerindeki verimlilik stratejilerini detaylandırmaktadır. **Bellek Duvarı**'nı ve OOP'nin ölçeklenme krizlerini analiz ediyoruz. Nexus Prime, "Sıfır-Sürtünmeli" unmanaged mimarisi ile CPU'nun teorik sınırlarında çalışırken, Unity gibi motorlara kesintisiz bir köprü sunar. Bu doküman, yüksek ölçekli simülasyon geliştirme için kapsamlı bir teknik rehber ve felsefi yol haritasıdır.
+Bu manifesto, **Nexus Prime**'ın teknik temellerini ve modern managed (yönetilen) dillerdeki sistemik performans darboğazlarını nasıl aştığını detaylandırmaktadır. **Bellek Duvarı** (Memory Wall), **Nesne Yönelimli Programlamanın** (OOP) ölçek krizleri ve modern çalışma zamanlarının mimari çıkmazlarını analiz ediyoruz.
+
+Nexus Prime, CPU'nun teorik sınırlarında çalışan "Sıfır-Sürtünmeli" (Zero-Friction) bir unmanaged mimari sunarken, Unity gibi managed ortamlar için kesintisiz ve tip-güvenli bir köprü oluşturur.
+
+### Değer Önerisi: Neden Nexus Prime?
+
+| Avantaj | Standart OOP (C#) | Nexus Prime (ECS) | Etki |
+| :--- | :--- | :--- | :--- |
+| **Bellek Topolojisi** | Dağınık Managed Heap | Bitişik Native Tamponlar | %100 Önbellek İsabeti (Cache Hit) |
+| **Kararlılık** | Periyodik GC Takılmaları | Sıfır-GC Tahsisi | Deterministik Kare Süreleri (Drop Yok) |
+| **Yürütme Akışı** | Rastgele İşaretçi Takibi | Doğrusal Komut Akışı | Maksimum Pipeline ve Tahmin Verimliliği |
+| **Paralellik** | Manuel Thread Yönetimi | Native JobSystem Dağıtımı | Otomatik Work-Stealing ve SIMD Desteği |
+
+### Nexus Suite: Çekirdeğin Ötesi
+
+Nexus Prime sadece bir depolama katmanı değil, tam donanımlı bir yüksek performanslı geliştirme ekosistemidir:
+
+*   **Snapshot Motoru**: Anlık kaydetme/yükleme ve deterministik "Zaman Yolculuğu" hata ayıklamasına olanak tanıyan yüksek doğruluklu durum serileştirme.
+*   **Nexus Query (O(1))**: Karmaşık çoklu bileşen gereksinimlerini sıfır arama maliyetiyle çözen reaktif bir sorgu motoru.
+*   **Integrity Sentinel**: Dosya sistemi tutarsızlıklarını düzelten, bellek sızıntılarını tespit eden ve unmanaged veri bütünlüğünü sağlayan otomatik dashboad.
+*   **Unity Güç Paketi**:
+    *   **Nexus Logger**: Konsol, dosya ve canlı UI'a ihmal edilebilir yükle veri aktaran çok kanallı günlükleme sistemi.
+    *   **Zengin Attributelar**: Mimari güvenliği derleme zamanında zorunlu kılan `[ReadOnly]`, `[Required]` ve `[MustBeUnmanaged]` etiketleri.
+    *   **Genişletme Metotları**: DOD verimliliği için özelleştirilmiş `String`, `Math` ve `Hierarchy` manipülasyon suitleri.
+    *   **Gelişmiş Tipler**: Bellek verimliliği için `NexusOptional` ve `BitPacked` gibi özelleştirilmiş veri yapıları.
+
+Bu doküman, yüksek ölçekli simülasyon geliştirme için kapsamlı bir teknik rehber, sorun-çözüm analizi ve felsefi yol haritasıdır.
 
 ---
 
@@ -335,7 +459,7 @@ Nexus Prime'ın mimari gerekliliğini kavramak için, üzerinde çalıştığı 
 | Terim | Nexus Prime Bağlamı | Teknik Tanım |
 | --- | --- | --- |
 | **L1/L2/L3 Cache** | **Birincil Hedef** | Küçük, son derece hızlı CPU-içi bellek. Nexus yüksek gecikmeli DRAM çağrılarını önlemek için %100 isabet oranını hedefler. |
-| **Cache Miss** | **Düşman** | İstenen verinin önbellekte bulunamaması ve RAM'e 'lik bir seyahat yapılması. |
+| **Cache Miss** | **Düşman** | İstenen verinin önbellekte bulunamaması ve RAM'e 100ns'lik bir seyahat yapılması. |
 | **Veri Yerelliği** | **Mimari Sütun** | Verilerin RAM'deki fiziksel yakınlığı. Nexus bitişik arabelleklerle %100 mekansal yerellik sağlar. |
 | **Komut Hattı** | **Yürütme Stratejisi** | CPU'nun komutları iç içe işlemesi. Nexus dallanmasız mantık ile hat tıkanıklıklarını önler. |
 | **SIMD** | **Hesaplama Çarpanı** | Tek Komut, Çoklu Veri. Nexus 8-16 adet 64-bitlik varlığı tek döngüde işlemek için AVX-256 kullanır. |
@@ -373,6 +497,7 @@ graph LR
 ```
 
 **Duraksama Matematiği:**
+$$Duraksama \% = IskalamaOrani \times Gecikme_{RAM}$$
 
 
 ### 2.2 Referans Krizi: Parçalanma ve İşaretçi Takibi
@@ -463,6 +588,7 @@ graph LR
 
 **Komut Verimliliği Matematiği:**
 64-byte'lık bir Önbellek Satırı (Cache Line) ve 16-byte'lık bir bileşen için:
+$$\frac{64 \ byte}{16 \ byte} = 4 \ Varlik/Satir$$
 
 
 
@@ -544,6 +670,7 @@ stateDiagram-v2
 ```
 
 **Matematiksel Yoğunluk İspatı:**
+$$Yogunluk_{Tampon} = \frac{N}{Kapasite} = \%100$$
 
 
 ---
@@ -588,7 +715,7 @@ Nexus, veriyi `NativeMemory.Alloc` ile tahsis ederek Sıfır-GC elde eder.
 
 Nexus, sistem bağımlılıklarını çözmek için **Kahn Algoritması** kullanır.
 
-* **Teorem**: Eğer  ise, o zaman  ve  paralel olarak çalıştırılabilir.
+* **Teorem**: Eğer $S_1 \cap S_2 = \emptyset$ ise, o zaman $S_1$ ve $S_2$ paralel olarak çalıştırılabilir.
 * **Sonuç**: Mevcut tüm CPU çekirdekleri üzerinde otomatik, kilitlenmesiz (lock-free) paralelleştirme.
 
 ### 7.2 SIMD (AVX2) Vektörizasyon
@@ -596,18 +723,49 @@ Nexus, sistem bağımlılıklarını çözmek için **Kahn Algoritması** kullan
 Milyonlarca varlığı `if` koşulu ile filtrelemek dallanma tahmini (branch prediction) için bir felakettir.
 
 * **Nexus Yaklaşımı**: 256-bit registerlar üzerinde bit düzeyinde (bitwise) işlemler kullanır. 1 komutta 32 filtreyi işler.
-* **Formül**: 
+* **Formül**: $S = B(C_1) \ \& \ B(C_2) \dots \ \& \ B(C_n)$
 
 ### 7.3 16KB Sayfalama & 64-Byte Hizalama
 
 * **16KB Sayfalama (Paging)**: 4 tipik OS bellek sayfasına eşittir, TLB önbellek isabetlerini maksimize eder.
 * **64-Byte Hizalama**: Her bileşenin bir CPU Önbellek Satırına mükemmel bir şekilde sığmasını sağlar. Bir önbellek satırı sınırını geçmek erişim maliyetini ikiye katlar.
 
+## 8. Mimari Soyutlama: DOD Köprüsü
+
+Nexus Prime, donanım duyarlı programlamanın brutal karmaşıklığını temiz, niyet odaklı bir API ile soyutlar. Düşük seviyeli C++ performansını, C#'ın güvenliği ve ergonomisi ile birleştirir.
+
+### 8.1 Karşılaştırma: Standart OOP vs. Nexus Prime
+
+| Özellik | Standart OOP (C#) | Nexus Prime (DOD) | Teknik Avantaj |
+| :--- | :--- | :--- | :--- |
+| **Kimlik** | Nesne Referansı (8 byte işaretçi) | `EntityId` (8 byte tamsayı) | Dolaylı erişim sıfırlanır; veri yer değiştirse bile ID sabit kalır. |
+| **Mantık** | Nesne içine gömülü (Update()) | Sistemlerde ayrıştırılmış (Execute()) | Instruction cache verimliliği; sistemler sadece gerekli veriye dokunur. |
+| **Depolama** | Managed Heap üzerinde dağınık | Bitişik Native Tamponlarda paketli | %100 Cache Line kullanımı; prefetcher bir sonraki veriyi öngörebilir. |
+| **Yaşam Döngüsü**| GC Yönetimli (Belirsiz zamanlı) | Manuel/Havuz Yönetimli (Deterministik) | Takılmaları (stutter) yok eder; GC üzerinde sıfır yük. |
+
+### 8.2 Kod Arketipleri: Uygulama Desenleri
+
+Standart OOP döngüleri "Referans Krizi" nedeniyle öngörülemezdir. Nexus, CPU'yu doğrusal, yüksek hızlı bir yürütme akışına zorlar.
+
+```csharp
+// OOP Felaketi (Yüksek Gecikme)
+foreach (var unit in army) {
+    // Erişim başına 3 ayrı Cache Miss riski (birim -> transform -> pos)
+    unit.Position += unit.Velocity * dt; 
+}
+
+// Nexus Avantajı (Zirve Bant Genişliği)
+NexusHelper.ForEach((ref Position p, ref Velocity v) => {
+    // %100 Cache Hit. Veri, RAM'den L1'e kesintisiz olarak akar.
+    p.Value += v.Value * dt;
+});
+```
+
 ---
 
-## 8. Performans Gerçekleri: Benchmark Verileri
+## 9. Performans Gerçekleri: Karşılaştırmalı Testler (Benchmarks)
 
-[Benchmark Raporu](https://www.google.com/search?q=file:///home/gokhanc/Development/Nexus/Documents/Manuals/Benchmarks_eng.md)'ndan alınan doğrulanmış sonuçlar:
+[Benchmark Raporu](https://github.com/gkhanC/Nexus/blob/master/Documents/Manuals/Benchmarks_eng.md)'ndan alınan doğrulanmış sonuçlar:
 
 | Kategori | Standart Managed C# (Unity) | Nexus Prime | Hız Artışı |
 | --- | --- | --- | --- |
@@ -618,15 +776,15 @@ Milyonlarca varlığı `if` koşulu ile filtrelemek dallanma tahmini (branch pre
 
 ---
 
-## 9. Stratejik Değerlendirme: Artılar ve Riskler
+## 10. Stratejik Değerlendirme: Artılar, Eksiler ve Riskler
 
-### 9.1 Avantajlar ve Güçlü Yönler
+### 10.1 Avantajlar ve Güçlü Yönler
 
 * **Sınırsız Ölçek**: OOP'de fiziksel olarak imkansız olan simülasyonlar sıradan hale gelir.
 * **Öngörülebilir Kararlılık**: Sıfır GC sıçraması, sıfır "açıklanamayan takılma" (stuttering) anlamına gelir.
 * **Doğrudan Donanım Kontrolü**: Yüksek hassasiyetli AVX/SSE kullanımı.
 
-### 9.2 Riskler ve Zayıf Yönler
+### 10.2 Riskler ve Zayıf Yönler (Cons)
 
 * **Manuel Temizlik**: `Dispose()` metodunu çağırmayı unutmak unmanaged bellek sızıntılarına (memory leak) yol açar.
 * **Dolaylı Erişim Vergisi**: Rastgele `Get` çağrıları için kullanılan SparseSet araması, doğrudan dizi erişiminden daha yavaştır (3.4x daha yavaş).
@@ -634,6 +792,42 @@ Milyonlarca varlığı `if` koşulu ile filtrelemek dallanma tahmini (branch pre
 
 ---
 
-## 10. Sonuç: Felsefi Ufuk
+## 11. Sonuç: Felsefi Ufuk
 
 Nexus Prime donanıma duyulan bir saygı taahhüdüdür. Kodlama alışkanlıklarınızı "Nesne yaratmaktan" "Veriyi orkestre etmeye" dönüştürür. Yazılım mantığını CPU'nun fiziksel yasalarıyla uyumlu hale getirerek, performansı "en iyi çaba" sonucundan çıkarıp deterministik bir matematiksel kesinliğe dönüştürür.
+
+---
+
+## 12. Bellek Yönetimi ve Performans Stratejisi
+Sıfır-GC bir mimaride bellek güvenliği, çalışma zamanından (runtime) mimara kaydırılır. Açık (explicit) temizleme, ekstrem performansın fiziksel bedelidir.
+
+### 12.1 "Aktör" Güvenlik Kalıbı
+OOP ve DOD dünyaları köprülenirken, unmanaged veriler managed yaşam döngülerine bağlanmalıdır.
+* **Registry Temizliği**: `Registry.Dispose()` çağrısı, tüm varlıkları ve bileşenleri güvenli bir şekilde deallocate eder.
+* **Hibrit Temizlik**: Unmanaged kimlik barındıran yönetilen nesneler (MonoBehaviour), nesne yok edildiğinde Swap-and-Pop yoğunluğunun bozulmaması için `IDisposable` uygulamalıdır.
+
+### 12.2 Mimari Zayıflıkları Giderme
+* **Erişim Vergisini Aşmak**: `SparseSet.Get` $O(1)$ olsa da, sıralı olmayan erişim modeli donanımsal bir darboğazdır. Yüksek bant genişlikli sistemler Registry'nin rastgele erişimini atlamalı ve doğrudan paketlenmiş **Yoğun Dizi (Dense Array)** üzerinde çalışmalıdır.
+* **Ölçek Sürtünmesi**: Nexus, gecikme (latency) yerine verimlilik (throughput) için optimize edilmiştir. $< 100$ varlık içeren senaryolarda, yönetim yükü (Job planlama, Senkronizasyon) yürütme kazancını aşar. Küçük ölçekli UI mantığı için hibrit tamponlar önerilir.
+
+### 12.3 Dispose Kalıbı ve Hibrit Sınıflar
+Unity gibi hibrit ortamlarda `IDisposable` güvenliğinizdir.
+* **Registry Sahipliği**: `Registry`, üst düzey unmanaged tamponların sahibidir. Dispose edilmesi tüm varlık/bileşen belleğini güvenli bir şekilde yok eder.
+* **Aktör Kalıbı**: Unmanaged veri barındıran yönetilen sınıflar MUTLAKA `Dispose` uygulamalıdır.
+```csharp
+public void Dispose() {
+    if (!_entity.IsNull) _registry.Destroy(_entity);
+    _unmanagedListe.Dispose(); 
+    GC.SuppressFinalize(this);
+}
+```
+
+### 12.4 Dolaylı Erişim Vergisini Ortadan Kaldırma
+`Registry.Get<T>` $O(1)$ olsa da, dağınık aramalar doğrusal iterasyona göre gecikme cezası getirir.
+* **Strateji**: Her zaman **Sıralı Sistem Erişimi**'ne öncelik verin. Bir `INexusSystem` içinde CPU prefetcher, bileşen dizilerini siz daha istemeden L1 önbelleğine getirir.
+* **Kural**: `Get` metodunu reaktif mantık için; `Sistemleri` ise yüksek frekanslı simülasyon mantığı için kullanın.
+
+### 12.5 Stratejik Ölçeklendirme (Yük Treni Analojisi)
+Nexus yüksek bant genişlikli bir motordur.
+* **Küçük Ölçek (< 100 Varlık)**: Düşük yönetim yükü nedeniyle standart OOP genellikle daha hızlıdır.
+* **Büyük Ölçek (> 1000 Varlık)**: Nexus vazgeçilmez hale gelir. Manuel yönetim maliyeti, GC sıçramalarının ve önbellek ıskalamalarının (cache miss) ortadan kalkmasıyla fazlasıyla telafi edilir.

@@ -52,4 +52,4 @@ Sistem alanlarını her zaman `[Read]` veya `[Write]` ile işaretleyin. Jenerat�
 ---
 
 ## Orijinal Kod
-[NexusSystemGenerator.cs Kaynak Kodu](file:///home/gokhanc/Development/Nexus/NexusGenerator/NexusSystemGenerator.cs)
+[NexusSystemGenerator.cs Kaynak Kodu](https://github.com/gkhanC/Nexus/blob/master/NexusGenerator/NexusSystemGenerator.cs)

@@ -168,6 +168,50 @@ public unsafe void Execute(EntityCommandBuffer ecb)
 - **Never Allocate in Systems**: Avoid `new` objects. Use the Managed Heap only once during initialization.
 - **Data Alignment**: Keep structs under 64 bytes if possible to perfectly fit CPU Cache Lines.
 - **Profiling**: Always benchmark `Push/Pull` operations; synchronization is where performance dies.
+- **Dispose**: Call `Dispose()` on the `Registry` and any standalone `Nexus Collections` when their lifecycle ends to prevent unmanaged memory leaks.
+
+---
+
+## 8. Memory Management & Mastering the Architecture
+Nexus Prime is a **Zero-GC** unmanaged framework. While this yields extreme performance, it shifts memory responsibility to the developer.
+
+### 8.1 The Dispose Pattern
+You MUST manually call `.Dispose()` for:
+1. **Registry**: At simulation end (Unity `OnDestroy`).
+2. **Hybrid Classes**: Classes owning a `Registry` or unmanaged `Nexus Collections` must implement `IDisposable`.
+3. **CachedQuery**: To prevent zombie event handlers.
+
+### 8.2 Hybrid Class Example (The "Actor" Pattern)
+```csharp
+public class NexusActor : MonoBehaviour, IDisposable {
+    private Registry _registry;
+    private EntityId _entity;
+    private NexusList<Matrix4x4> _transformTrace; 
+
+    public void Initialize(Registry reg) {
+        _registry = reg;
+        _entity = _registry.Create();
+        _transformTrace = new NexusList<Matrix4x4>(128);
+    }
+
+    private void OnDestroy() => Dispose();
+    public void Dispose() {
+        if (!_entity.IsNull) _registry.Destroy(_entity);
+        _transformTrace.Dispose();
+        GC.SuppressFinalize(this);
+    }
+}
+```
+
+### 8.3 Overcoming the Point-Lookup Tax
+`Registry.Get<T>(entity)` is $O(1)$ but 3.4x slower than raw array iteration.
+- **The Problem**: Calling `Get` inside a 10,000-iteration loop.
+- **The Solution**: Use **Symmetric System Iteration**. Let the `INexusSystem` iterate the **Dense Array** directly.
+
+### 8.4 Small Scale Friction
+- **< 100 Entities**: Use standard C# OOP.
+- **> 1000 Entities**: Nexus mandatory for cache stability.
+- **Strategy**: Use **Hybrid Buffers**. Keep UI/Logic in OOP, but move heavy simulation groups to Nexus.
 
 ---
 <br><br>
@@ -343,3 +387,48 @@ public unsafe void Execute(EntityCommandBuffer ecb)
 - **Sistem İçi Tahsisat Yapmayın**: `new` anahtar kelimesini sistemlerin (Execute) içinde asla kullanmayın. Managed Heap'i sadece oyun başlarken bir kez kullanın.
 - **Veri Hizalaması**: Yapıların (Struct) 64 byte'ın altında kalmasına özen gösterin; böylece CPU L1 Önbellek hattına tamamen, milimetrik otururlar.
 - **Analiz (Profiling)**: `Push/Pull` köprü operasyonlarının maliyetini daima profilleme araçlarıyla izleyin; senkronizasyon performansın öldüğü yerdir.
+
+---
+
+## 8. Bellek Yönetimi ve Mimari Ustalığı
+Nexus Prime, **Sıfır-GC** (Zero-GC) unmanaged bir çerçevedir. Bu, ekstrem performans sağlarken bellek sorumluluğunu geliştiriciye yükler.
+
+### 8.1 Dispose Kalıbı
+Aşağıdaki durumlarda manuel olarak `.Dispose()` çağırmalısınız:
+1. **Registry**: Simülasyon sonunda (Unity `OnDestroy`).
+2. **Hibrit Sınıflar**: Bir `Registry` veya unmanaged `Nexus Koleksiyonu` barındıran sınıflar `IDisposable` uygulamalıdır.
+3. **CachedQuery**: Zombi olay işleyicilerini (event handler) önlemek için.
+
+### 8.2 Hibrit Sınıf Örneği ("Actor" Kalıbı)
+```csharp
+public class NexusActor : MonoBehaviour, IDisposable {
+    private Registry _registry;
+    private EntityId _entity;
+    private NexusList<Matrix4x4> _transformTrace; 
+
+    public void Initialize(Registry reg) {
+        _registry = reg;
+        _entity = _registry.Create();
+        _transformTrace = new NexusList<Matrix4x4>(128);
+    }
+
+    private void OnDestroy() => Dispose();
+    public void Dispose() {
+        if (!_entity.IsNull) _registry.Destroy(_entity);
+        _transformTrace.Dispose();
+        GC.SuppressFinalize(this);
+    }
+}
+```
+
+### 8.3 Dolaylı Erişim Vergisini Aşmak
+`Registry.Get<T>(entity)` $O(1)$ olsa da ham dizi iterasyonundan 3.4 kat yavaştır.
+- **Sorun**: 10.000 iterasyonluk bir döngü içinde `Get` çağırmak.
+- **Çözüm**: **Simetrik Sistem İterasyonu** kullanın. `INexusSystem`'in doğrudan **Yoğun Dizi (Dense Array)** üzerinde çalışmasına izin verin.
+
+### 8.4 Küçük Ölçekli Sürtünme
+- **< 100 Varlık**: Standart C# OOP kullanın.
+- **> 1000 Varlık**: Önbellek kararlılığı için Nexus zorunludur.
+- **Strateji**: **Hibrit Tamponlar** kullanın. UI/Mantık kısımlarını OOP'de tutun, ancak ağır simülasyon gruplarını Nexus'a taşıyın.
+
+---

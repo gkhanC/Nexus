@@ -56,4 +56,4 @@ NEVER suppress (ignore) NexusAnalyzer errors. These errors are **your greatest a
 ---
 
 ## Original Source
-[NexusAnalyzer.cs Source Code](file:///home/gokhanc/Development/Nexus/NexusGenerator/NexusAnalyzer.cs)
+[NexusAnalyzer.cs Source Code](https://github.com/gkhanC/Nexus/blob/master/NexusGenerator/NexusAnalyzer.cs)

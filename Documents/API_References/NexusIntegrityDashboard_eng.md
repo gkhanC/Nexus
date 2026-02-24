@@ -48,4 +48,4 @@ A "Degraded" warning in the Integrity Dashboard usually signals the beginning of
 ---
 
 ## Original Source
-[NexusIntegrityDashboard.cs Source Code](file:///home/gokhanc/Development/Nexus/Nexus.Editor/EditorCockpit/NexusIntegrityDashboard.cs)
+[NexusIntegrityDashboard.cs Source Code](https://github.com/gkhanC/Nexus/blob/master/Nexus.Editor/EditorCockpit/NexusIntegrityDashboard.cs)

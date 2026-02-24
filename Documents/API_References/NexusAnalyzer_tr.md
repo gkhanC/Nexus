@@ -56,4 +56,4 @@ NexusAnalyzer hatalarını ASLA bastırmayın (ignore). Bu hatalar, **projenizde
 ---
 
 ## Orijinal Kod
-[NexusAnalyzer.cs Kaynak Kodu](file:///home/gokhanc/Development/Nexus/NexusGenerator/NexusAnalyzer.cs)
+[NexusAnalyzer.cs Kaynak Kodu](https://github.com/gkhanC/Nexus/blob/master/NexusGenerator/NexusAnalyzer.cs)

@@ -52,4 +52,4 @@ Always mark system fields with `[Read]` or `[Write]`. The generator **uses proce
 ---
 
 ## Original Source
-[NexusSystemGenerator.cs Source Code](file:///home/gokhanc/Development/Nexus/NexusGenerator/NexusSystemGenerator.cs)
+[NexusSystemGenerator.cs Source Code](https://github.com/gkhanC/Nexus/blob/master/NexusGenerator/NexusSystemGenerator.cs)
